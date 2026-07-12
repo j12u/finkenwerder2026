@@ -1,0 +1,41 @@
+.tree,
+.tree-children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tree-toggle {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: red;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.tree-toggle::before {
+  color: red;
+  content: "\25B6";
+  display: inline-block;
+  margin-right: 6px;
+  transition: transform 0.2s ease;
+}
+
+.tree-toggle.is-open::before {
+  transform: rotate(90deg);
+}
+
+.tree-children {
+  display: none;
+  padding-left: 1.25rem;
+}
+
+.tree-children.is-open {
+  display: block;
+}
+
+.tree-children li {
+  margin-top: 0.25rem;
+}

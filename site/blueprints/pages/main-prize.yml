@@ -1,0 +1,14 @@
+title: Main Prize
+
+sections:
+  artist:
+    type: pages
+    label: Artist
+    templates: artist
+    max: 1
+
+  works:
+    type: pages
+    label: Works
+    templates: main-prize-work
+

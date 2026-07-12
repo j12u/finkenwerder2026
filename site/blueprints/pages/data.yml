@@ -1,0 +1,6 @@
+title: Data Privacy
+
+fields:
+  text:
+    label: Text
+    type: textarea

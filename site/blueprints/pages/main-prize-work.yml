@@ -1,0 +1,19 @@
+title: Main Prize Work
+
+fields:
+  images:
+    type: files
+    label: Images
+    multiple: true
+
+  year:
+    label: Year
+    type: text
+
+  material:
+    label: Material
+    type: text
+
+  description:
+    label: Description
+    type: textarea

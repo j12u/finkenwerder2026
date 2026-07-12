@@ -1,0 +1,6 @@
+title: Imprint 
+
+fields:
+  text:
+    label: Text
+    type: textarea

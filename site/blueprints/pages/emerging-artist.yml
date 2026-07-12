@@ -1,0 +1,13 @@
+title: Emerging Artist
+
+sections:
+  artist:
+    type: pages
+    label: Artist
+    templates: artist
+    max: 1
+
+  works:
+    type: pages
+    label: Works
+    templates: emerging-artist-work

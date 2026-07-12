@@ -1,0 +1,34 @@
+title: Emerging Artist Work
+
+fields:
+
+  images:
+    type: files
+    label: Images
+    multiple: true
+
+  year:
+    type: text
+    label: Year
+
+  medium:
+    type: text
+    label: Medium
+
+  duration:
+    type: text
+    label: Duration
+
+  dimensions:
+    type: text
+    label: Dimensions
+
+  courtesy:
+    type: text
+    label: Courtesy
+
+  description:
+    type: textarea
+    label: Description
+    size: large
+
