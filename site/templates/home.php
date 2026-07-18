@@ -9,45 +9,40 @@
     ?>
 
     <?php if ($mainPrizeArtist || $mainPrizeWorks->isNotEmpty()): ?>
-      <ul class="tree">
-        <li>
-          <button class="tree-toggle" type="button" aria-expanded="false">
-            <?= $mainPrize->title()->html() ?>
-          </button>
-          <ul class="tree-children">
-            <?php if ($mainPrizeArtist): ?>
-              <li>
-                <button class="tree-toggle" type="button" aria-expanded="false">
-                  <?= $mainPrizeArtist->title()->html() ?>
-                </button>
-                <ul class="tree-children">
-                  <?php if ($mainPrizeArtist->text()->isNotEmpty()): ?>
-                    <li><?= $mainPrizeArtist->text()->kt() ?></li>
-                  <?php endif ?>
-                </ul>
-              </li>
-            <?php endif ?>
+      <h1><?= $mainPrize->title()->html() ?></h1>
 
-            <?php foreach ($mainPrizeWorks as $work): ?>
-              <li>
-                <button class="tree-toggle" type="button" aria-expanded="false">
-                  <?= $work->title()->html() ?>
-                </button>
-                <ul class="tree-children">
-                  <?php if ($work->year()->isNotEmpty()): ?>
-                    <li>Year: <?= $work->year()->html() ?></li>
-                  <?php endif ?>
-                  <?php if ($work->material()->isNotEmpty()): ?>
-                    <li>Material: <?= $work->material()->html() ?></li>
-                  <?php endif ?>
-                  <?php if ($work->description()->isNotEmpty()): ?>
-                    <li><?= $work->description()->kt() ?></li>
-                  <?php endif ?>
-                </ul>
-              </li>
-            <?php endforeach ?>
-          </ul>
-        </li>
+      <ul class="tree">
+        <?php if ($mainPrizeArtist): ?>
+          <li>
+            <button class="tree-toggle" type="button" aria-expanded="false">
+              <?= $mainPrizeArtist->title()->html() ?>
+            </button>
+            <ul class="tree-children">
+              <?php if ($mainPrizeArtist->text()->isNotEmpty()): ?>
+                <li><?= $mainPrizeArtist->text()->kt() ?></li>
+              <?php endif ?>
+            </ul>
+          </li>
+        <?php endif ?>
+
+        <?php foreach ($mainPrizeWorks as $work): ?>
+          <li>
+            <button class="tree-toggle" type="button" aria-expanded="false">
+              <?= $work->title()->html() ?>
+            </button>
+            <ul class="tree-children">
+              <?php if ($work->year()->isNotEmpty()): ?>
+                <li>Year: <?= $work->year()->html() ?></li>
+              <?php endif ?>
+              <?php if ($work->material()->isNotEmpty()): ?>
+                <li>Material: <?= $work->material()->html() ?></li>
+              <?php endif ?>
+              <?php if ($work->description()->isNotEmpty()): ?>
+                <li><?= $work->description()->kt() ?></li>
+              <?php endif ?>
+            </ul>
+          </li>
+        <?php endforeach ?>
       </ul>
     <?php endif ?>
   <?php endif ?>
