@@ -45,6 +45,10 @@ body {
   padding: 0;
 }
 
+.tree-group li:hover {
+  color: white;
+}
+
 .tree-toggle {
   appearance: none;
   background: none;
@@ -67,3 +71,22 @@ body {
 .tree-children li {
   margin-top: 0.25rem;
 }
+
+/* HOVER */
+#main-prize .tree.tree-group .tree-toggle:hover,
+#emerging-artist .tree.tree-group .tree-toggle:hover {
+  color: white;
+}
+
+#about .tree-toggle:hover {
+  color: white;
+}
+
+#imprint .tree-toggle:hover {
+  color: white;
+}
+
+#data-privacy .tree-toggle:hover {
+  color: white;
+}
+/* HOVER */
