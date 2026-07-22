@@ -134,33 +134,67 @@
     </section>
   <?php endif ?>
 
-  <section class="landing-section" id="about">
-    <?php if ($about = page('about')): ?>
-      <h1><?= $about->title()->html() ?></h1>
-      <div class="section-text">
-        <?= $about->text()->kt() ?>
-      </div>
-    <?php endif ?>
-  </section>
+  <?php if ($about = page('about')): ?>
+    <section class="landing-section" id="about">
+      <?php if ($about->text()->isNotEmpty()): ?>
+      <?php endif ?>
 
-  <section class="landing-section" id="imprint">
-    <?php if ($imprint = page('imprint')): ?>
-      <h1><?= $imprint->title()->html() ?></h1>
-      <div class="section-text">
-        <?= $imprint->text()->kt() ?>
-      </div>
-    <?php endif ?>
-  </section>
+      <ul class="tree tree-group">
+        <li>
+          <button class="tree-toggle" type="button" aria-expanded="false">
+            <?= $about->title()->html() ?>
+          </button>
+          <ul class="tree-children">
+            <?php if ($about->text()->isNotEmpty()): ?>
+              <li><?= $about->text()->kt() ?></li>
+            <?php endif ?>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  <?php endif ?>
 
-  <section class="landing-section" id="data">
-    <?php if ($data = page('data-privacy')): ?>
-      <h1><?= $data->title()->html() ?></h1>
-      <div class="section-text">
-        <?= $data->text()->kt() ?>
-      </div>
-    <?php endif ?>
-  </section>
-</main>
+  <?php if ($about = page('imprint')): ?>
+    <section class="landing-section" id="imprint">
+      <?php if ($about->text()->isNotEmpty()): ?>
+      <?php endif ?>
+
+      <ul class="tree tree-group">
+        <li>
+          <button class="tree-toggle" type="button" aria-expanded="false">
+            <?= $about->title()->html() ?>
+          </button>
+          <ul class="tree-children">
+            <?php if ($about->text()->isNotEmpty()): ?>
+              <li><?= $about->text()->kt() ?></li>
+            <?php endif ?>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  <?php endif ?>
+
+   <?php if ($about = page('data-privacy')): ?>
+    <section class="landing-section" id="data-privacy">
+      <?php if ($about->text()->isNotEmpty()): ?>
+      <?php endif ?>
+
+      <ul class="tree tree-group">
+        <li>
+          <button class="tree-toggle" type="button" aria-expanded="false">
+            <?= $about->title()->html() ?>
+          </button>
+          <ul class="tree-children">
+            <?php if ($about->text()->isNotEmpty()): ?>
+              <li><?= $about->text()->kt() ?></li>
+            <?php endif ?>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  <?php endif ?>
+
+
 
 <script>
   document.querySelectorAll(".tree-toggle").forEach((toggle) => {
