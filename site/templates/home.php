@@ -9,12 +9,12 @@
 
     <?php if ($mainPrizeArtist || $mainPrizeWorks->isNotEmpty()): ?>
       <section class="landing-section" id="main-prize">
-        <h1><?= $mainPrize->title()->html() ?></h1>
+        <p><?= $mainPrize->title()->html() ?></p>
 
         <ul class="tree">
           <?php if ($mainPrizeArtist): ?>
             <li>
-              <h2>Artist</h2>
+              <p>Artist</p>
               <ul class="tree tree-group">
                 <li>
                   <button class="tree-toggle" type="button" aria-expanded="false">
@@ -32,7 +32,7 @@
 
           <?php if ($mainPrizeWorks->isNotEmpty()): ?>
             <li>
-              <h2>Works</h2>
+              <p>Works</p>
               <ul class="tree tree-group">
                 <?php foreach ($mainPrizeWorks as $work): ?>
                   <li>
@@ -67,7 +67,7 @@
     ?>
 
     <section class="landing-section" id="emerging-artist">
-      <h1><?= $emergingArtist->title()->html() ?></h1>
+      <p><?= $emergingArtist->title()->html() ?></p>
 
       <?php if ($emergingArtist->text()->isNotEmpty()): ?>
         <div class="section-text">
@@ -79,7 +79,7 @@
         <ul class="tree">
           <?php if ($emergingArtistPage): ?>
             <li>
-              <h2>Artist</h2>
+              <p>Artist</p>
               <ul class="tree tree-group">
                 <li>
                   <button class="tree-toggle" type="button" aria-expanded="false">
@@ -97,7 +97,7 @@
 
           <?php if ($emergingWorks->isNotEmpty()): ?>
             <li>
-              <h2>Works</h2>
+              <p>Works</p>
               <ul class="tree tree-group">
                 <?php foreach ($emergingWorks as $work): ?>
                   <li>
@@ -136,9 +136,6 @@
 
   <?php if ($about = page('about')): ?>
     <section class="landing-section" id="about">
-      <?php if ($about->text()->isNotEmpty()): ?>
-      <?php endif ?>
-
       <ul class="tree tree-group">
         <li>
           <button class="tree-toggle" type="button" aria-expanded="false">
@@ -156,9 +153,6 @@
 
   <?php if ($about = page('imprint')): ?>
     <section class="landing-section" id="imprint">
-      <?php if ($about->text()->isNotEmpty()): ?>
-      <?php endif ?>
-
       <ul class="tree tree-group">
         <li>
           <button class="tree-toggle" type="button" aria-expanded="false">
@@ -176,9 +170,6 @@
 
    <?php if ($about = page('data-privacy')): ?>
     <section class="landing-section" id="data-privacy">
-      <?php if ($about->text()->isNotEmpty()): ?>
-      <?php endif ?>
-
       <ul class="tree tree-group">
         <li>
           <button class="tree-toggle" type="button" aria-expanded="false">

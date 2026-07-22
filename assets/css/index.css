@@ -1,3 +1,43 @@
+@font-face {
+  font-family: "TeX Gyre Heros";
+  src:
+    url("/assets/fonts/texgyreheros-regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TeX Gyre Heros";
+  src:
+    url("/assets/fonts/texgyreheros-bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TeX Gyre Heros";
+  src:
+    url("/assets/fonts/texgyreheros-italic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TeX Gyre Heros";
+  src:
+    url("/assets/fonts/texgyreheros-bolditalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+
+body {
+  font-family: "TeX Gyre Heros", sans-serif;
+}
+
 .tree,
 .tree-children {
   list-style: none;
@@ -9,22 +49,10 @@
   appearance: none;
   background: none;
   border: 0;
-  color: red;
+  color: rgb(0, 0, 0);
   cursor: pointer;
   font: inherit;
   padding: 0;
-}
-
-.tree-toggle::before {
-  color: red;
-  content: "\25B6";
-  display: inline-block;
-  margin-right: 6px;
-  transition: transform 0.2s ease;
-}
-
-.tree-toggle.is-open::before {
-  transform: rotate(90deg);
 }
 
 .tree-children {

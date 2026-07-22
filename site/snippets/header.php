@@ -9,9 +9,6 @@
 <body>
 
 <header class="site-header">
-  <a class="site-title" href="<?= $site->url() ?>">
-    <?= $site->title() ?>
-  </a>
 
   <?php if ($kirby->languages()->count() > 1): ?>
     <nav class="language-switch">
