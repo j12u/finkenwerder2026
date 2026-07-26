@@ -44,15 +44,15 @@ body {
 
 /* LINE */
 .tree-toggle::before {
-  content: "├ ";
+  content: "┣ ";
 }
 
 .tree-toggle:last-child::before {
-  content: "└ ";
+  content: "┗ ";
 }
 
 .tree-toggle.tree-toggle-terminal::before {
-  content: "└ ";
+  content: "┗ ";
 }
 
 .tree-toggle.tree-toggle-last {
@@ -63,17 +63,17 @@ body {
 
 #main-prize > .tree-root-row > p::before,
 #emerging-artist > .tree-root-row > p::before {
-  content: "├ ";
+  content: "┣ ";
 }
 
 
 #main-prize > .tree-root-row > .tree > li:last-child > p::before,
 #emerging-artist > .tree-root-row > .tree > li:last-child > p::before {
-  content: "└ ";
+  content: "┗ ";
 }
 
 #data-privacy .tree-toggle::before {
-  content: "└ ";
+  content: "┗";
 }
 
 /* LINE */
