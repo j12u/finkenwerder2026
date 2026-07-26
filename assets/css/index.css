@@ -7,35 +7,9 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "TeX Gyre Heros";
-  src:
-    url("/assets/fonts/texgyreheros-bold.otf") format("opentype");
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "TeX Gyre Heros";
-  src:
-    url("/assets/fonts/texgyreheros-italic.otf") format("opentype");
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "TeX Gyre Heros";
-  src:
-    url("/assets/fonts/texgyreheros-bolditalic.otf") format("opentype");
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-}
-
 body {
   font-family: "TeX Gyre Heros", sans-serif;
+  font-size: 1.04rem;
 }
 
 .tree,
@@ -122,6 +96,7 @@ body {
   display: block;
 }
 
+/* main-layout */
 #main-prize > .tree-root-row,
 #emerging-artist > .tree-root-row {
   align-items: flex-start;
@@ -150,6 +125,14 @@ body {
   grid-template-columns: max-content 1fr;
 }
 
+#main-prize > .tree-root-row > .tree > li {
+  grid-template-columns: 7rem 1fr;
+}
+
+#emerging-artist > .tree-root-row > .tree > li {
+  grid-template-columns: 7rem 1fr;
+}
+
 #main-prize > .tree-root-row > .tree > li > p,
 #emerging-artist > .tree-root-row > .tree > li > p {
   margin: 0;
@@ -161,6 +144,14 @@ body {
   margin: 0;
   padding-left: 0;
 }
+
+/* main - name, worklist position  */
+#main-prize > .tree-root-row > .tree > li > .tree-group,
+#emerging-artist > .tree-root-row > .tree > li > .tree-group {
+  margin-left: 4.5rem;
+}
+
+/* main-layout */
 
 #emerging-artist .work-images {
   display: flex;
@@ -177,4 +168,9 @@ body {
   display: block;
   height: auto;
   max-width: 12rem;
+}
+
+/* emerging - name, worklist position  */
+#emerging-artist > .tree-root-row > .tree > li > .tree-group {
+  margin-left: -1.47rem;
 }
