@@ -89,7 +89,7 @@
                 <p>Artist</p>
                 <ul class="tree tree-group">
                   <li>
-                    <button class="tree-toggle" type="button" aria-expanded="false">
+                    <button class="tree-toggle tree-toggle-last" type="button" aria-expanded="false">
                       <?= $emergingArtistPage->title()->html() ?>
                     </button>
                     <ul class="tree-children">
