@@ -45,10 +45,6 @@ body {
   padding: 0;
 }
 
-.tree-group li:hover {
-  color: white;
-}
-
 .tree-toggle {
   appearance: none;
   background: none;
