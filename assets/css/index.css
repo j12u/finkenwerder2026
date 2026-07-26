@@ -166,6 +166,54 @@ body {
 }
 
 /* MAIN-PRIZE */
+
+/* artist name position */
+#main-prize .tree-toggle.tree-toggle-main-artist {
+  display: inline-block;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+/* line for main-prize artist */
+#main-prize .tree-toggle.tree-toggle-main-artist::before {
+  content: "";
+  border-top: 1px solid currentColor;
+  left: -9.65rem;
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 10.5rem;
+}
+
+/* line for first work - work list */
+#main-prize .tree-toggle.tree-toggle-main-first-work {
+  display: inline-block;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+/* first work line - hor */
+#main-prize .tree-toggle.tree-toggle-main-first-work::before {
+  content: "";
+  border-top: 1px solid currentColor;
+  position: absolute;
+  left: -9.2rem;
+  top: 0.82rem;
+  transform: translateY(-50%);
+  width: 10.2rem;
+}
+
+/* first work line - ver */
+#main-prize .tree-toggle.tree-toggle-main-first-work::after {
+  content: "";
+  border-left: 1px solid currentColor;
+  height: 0.45em;
+  position: absolute;
+  left: 0.48rem;
+  top: 0.82rem;
+  transform: translateY(-5%);
+}
+
 #main-prize .work-images img {
   display: block;
   height: auto;
@@ -174,6 +222,34 @@ body {
 #main-prize .tree-group .tree-toggle {
   color: rgb(202, 202, 202);
 }
+
+/* ㅜline for artist label */
+#main-prize > .tree-root-row > .tree > li:first-child {
+  position: relative;
+}
+
+/* ㅜline for artist label - hor */
+#main-prize > .tree-root-row > .tree > li:first-child::before {
+  content: "";
+  border-top: 1px solid currentColor;
+  position: absolute;
+  left: -2.7rem;
+  top: 0.82rem;
+  transform: translateY(-50%);
+  width: 3.7rem;
+}
+
+/* ㅜline for artist label - ver */
+#main-prize > .tree-root-row > .tree > li:first-child::after {
+  content: "";
+  border-left: 1px solid currentColor;
+  height: 0.45em;
+  position: absolute;
+  left: 0.48rem;
+  top: 0.82rem;
+  transform: translateY(-5%);
+}
+
 /* MAIN-PRIZE */
 
 /* EMERGING-ARTIST */
@@ -207,6 +283,24 @@ body {
   color: rgb(202, 202, 202);
 }
 
+/* line for work list */
+#emerging-artist .tree-toggle.tree-toggle-emerging-work-line {
+  display: inline-block;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+/* line for work list - hor */
+#emerging-artist .tree-toggle.tree-toggle-emerging-work-line::before {
+  content: "";
+  border-top: 1px solid currentColor;
+  left: -3.1rem;
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 4.1rem;
+}
+
 /* artist name - position */
 #emerging-artist .tree-toggle.tree-toggle-last {
   top: -0.07rem;
@@ -224,16 +318,6 @@ body {
   transform: translateY(-50%);
   width: 4.5rem;
 }
-/* ㅜline for emerging - ver*/
-#emerging-artist .tree-toggle.tree-toggle-last::after {
-  content: "";
-  border-left: 1px solid currentColor;
-  height: 0.45em;
-  left: 1.2rem;
-  position: absolute;
-  top: 55%;
-  transform: translate(-50%, -5%);
-}
 
 /* ㅜline for artist label */
 #emerging-artist > .tree-root-row > .tree > li:first-child {
@@ -245,20 +329,20 @@ body {
   content: "";
   border-top: 1px solid currentColor;
   position: absolute;
-  left: -2.5rem;
-  top: 0.82rem;
+  left: -2.6rem;
+  top: 0.7rem;
   transform: translateY(-50%);
-  width: 3.3rem;
+  width: 3.6rem;
 }
 
 /* ㅜline for artist label - ver */
 #emerging-artist > .tree-root-row > .tree > li:first-child::after {
   content: "";
   border-left: 1px solid currentColor;
-  height: 0.45em;
+  height: 0.6em;
   position: absolute;
   left: 0.5rem;
-  top: 0.82rem;
+  top: 0.7rem;
   transform: translateY(-5%);
 }
 

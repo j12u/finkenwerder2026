@@ -18,7 +18,7 @@
                 <p>Artist</p>
                 <ul class="tree tree-group">
                   <li>
-                    <button class="tree-toggle" type="button" aria-expanded="false">
+                    <button class="tree-toggle tree-toggle-main-artist" type="button" aria-expanded="false">
                       <?= $mainPrizeArtist->title()->html() ?>
                     </button>
                     <ul class="tree-children">
@@ -37,8 +37,9 @@
                 <ul class="tree tree-group">
                   <?php foreach ($mainPrizeWorks as $work): ?>
                     <?php $isTerminalWork = in_array($work->uid(), ['silent-force-red-caress', 'being-strong-is-hard'], true); ?>
+                    <?php $isFirstMainWork = $work->is($mainPrizeWorks->first()); ?>
                     <li>
-                      <button class="tree-toggle<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?>" type="button" aria-expanded="false">
+                      <button class="tree-toggle<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?><?= $isFirstMainWork ? ' tree-toggle-main-first-work' : '' ?>" type="button" aria-expanded="false">
                         <?= $work->title()->html() ?>
                       </button>
                       <ul class="tree-children">
@@ -107,9 +108,10 @@
                 <p>Works</p>
                 <ul class="tree tree-group">
                   <?php foreach ($emergingWorks as $work): ?>
-                    <?php $isTerminalWork = in_array($work->uid(), ['silent-force-red-caress', 'being-strong-is-hard'], true); ?>
+                    <?php $isTerminalWork = $work->uid() === 'silent-force-red-caress'; ?>
+                    <?php $isEmergingLineWork = $work->uid() === 'being-strong-is-hard'; ?>
                     <li>
-                      <button class="tree-toggle<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?>" type="button" aria-expanded="false">
+                      <button class="tree-toggle<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?><?= $isEmergingLineWork ? ' tree-toggle-emerging-work-line' : '' ?>" type="button" aria-expanded="false">
                         <?= $work->title()->html() ?>
                       </button>
                       <ul class="tree-children">
