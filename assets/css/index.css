@@ -68,10 +68,37 @@ body {
   margin-top: 0.25rem;
 }
 
+.tree-toggle::before {
+  content: "├ ";
+}
+
+.tree-toggle:last-child::before {
+  content: "└ ";
+}
+
+#main-prize > .tree-root-row > p::before,
+#emerging-artist > .tree-root-row > p::before {
+  content: "├ ";
+}
+
+#main-prize > .tree-root-row > .tree > li > p::before,
+#emerging-artist > .tree-root-row > .tree > li > p::before {
+  content: "├ ";
+}
+
+#main-prize > .tree-root-row > .tree > li:last-child > p::before,
+#emerging-artist > .tree-root-row > .tree > li:last-child > p::before {
+  content: "└ ";
+}
+
 /* HOVER */
 #main-prize .tree.tree-group .tree-toggle:hover,
 #emerging-artist .tree.tree-group .tree-toggle:hover {
   color: white;
+}
+
+#data-privacy .tree-toggle::before {
+  content: "└ ";
 }
 
 #about .tree-toggle:hover {
@@ -86,3 +113,68 @@ body {
   color: white;
 }
 /* HOVER */
+
+#main-prize {
+  display: block;
+}
+
+#emerging-artist {
+  display: block;
+}
+
+#main-prize > .tree-root-row,
+#emerging-artist > .tree-root-row {
+  align-items: flex-start;
+  column-gap: 3rem;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+
+#main-prize > .tree-root-row > p,
+#emerging-artist > .tree-root-row > p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+#main-prize > .tree-root-row > .tree,
+#emerging-artist > .tree-root-row > .tree {
+  margin: 0;
+  padding-left: 0;
+}
+
+#main-prize > .tree-root-row > .tree > li,
+#emerging-artist > .tree-root-row > .tree > li {
+  align-items: flex-start;
+  column-gap: 2rem;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+
+#main-prize > .tree-root-row > .tree > li > p,
+#emerging-artist > .tree-root-row > .tree > li > p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+#main-prize > .tree-root-row > .tree > li > .tree-group,
+#emerging-artist > .tree-root-row > .tree > li > .tree-group {
+  margin: 0;
+  padding-left: 0;
+}
+
+#emerging-artist .work-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+#emerging-artist .work-images figure {
+  margin: 0;
+}
+
+#emerging-artist .work-images img {
+  display: block;
+  height: auto;
+  max-width: 12rem;
+}
