@@ -18,7 +18,7 @@
                 <p>Artist</p>
                 <ul class="tree tree-group">
                   <li>
-                    <button class="tree-toggle tree-toggle-main-artist" type="button" aria-expanded="false">
+                    <button class="tree-toggle tree-toggle-artist tree-toggle-main-artist" type="button" aria-expanded="false">
                       <?= $mainPrizeArtist->title()->html() ?>
                     </button>
                     <ul class="tree-children">
@@ -68,6 +68,16 @@
               </li>
             <?php endif ?>
           </ul>
+
+          <?php if ($kirby->languages()->count() > 1): ?>
+            <nav class="language-switch">
+              <?php foreach ($kirby->languages() as $language): ?>
+                <a href="<?= $page->url($language->code()) ?>"<?= $kirby->language()?->code() === $language->code() ? ' aria-current="true"' : '' ?>>
+                  <?= strtoupper($language->code()) ?>
+                </a>
+              <?php endforeach ?>
+            </nav>
+          <?php endif ?>
         </div>
       </section>
     <?php endif ?>
@@ -90,7 +100,7 @@
                 <p>Artist</p>
                 <ul class="tree tree-group">
                   <li>
-                    <button class="tree-toggle tree-toggle-last" type="button" aria-expanded="false">
+                    <button class="tree-toggle tree-toggle-artist tree-toggle-last" type="button" aria-expanded="false">
                       <?= $emergingArtistPage->title()->html() ?>
                     </button>
                     <ul class="tree-children">
@@ -214,6 +224,17 @@
 
 
 <script>
+  const updateArtistHighlight = () => {
+    document.querySelectorAll("#main-prize, #emerging-artist").forEach((section) => {
+      const artistToggle = section.querySelector(".tree-toggle-artist");
+      const openWork = section.querySelector(".tree-group .tree-toggle.is-open:not(.tree-toggle-artist)");
+
+      if (!artistToggle) return;
+
+      artistToggle.classList.toggle("has-open-work", Boolean(openWork));
+    });
+  };
+
   document.querySelectorAll(".tree-toggle").forEach((toggle) => {
     toggle.addEventListener("click", () => {
       const nested = toggle.nextElementSibling;
@@ -236,8 +257,12 @@
         toggle.classList.add("is-open");
         toggle.setAttribute("aria-expanded", "true");
       }
+
+      updateArtistHighlight();
     });
   });
+
+  updateArtistHighlight();
 </script>
 
 <?php snippet('footer') ?>

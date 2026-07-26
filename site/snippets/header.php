@@ -10,10 +10,10 @@
 
 <header class="site-header">
 
-  <?php if ($kirby->languages()->count() > 1): ?>
+  <?php if ($kirby->languages()->count() > 1 && $page->isHomePage() === false): ?>
     <nav class="language-switch">
       <?php foreach ($kirby->languages() as $language): ?>
-        <a href="<?= $page->url($language->code()) ?>">
+        <a href="<?= $page->url($language->code()) ?>"<?= $kirby->language()?->code() === $language->code() ? ' aria-current="true"' : '' ?>>
           <?= strtoupper($language->code()) ?>
         </a>
       <?php endforeach ?>

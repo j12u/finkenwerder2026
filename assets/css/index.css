@@ -12,6 +12,21 @@ body {
   font-size: 1.04rem;
 }
 
+.language-switch {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.language-switch a {
+  color: rgb(202, 202, 202);
+  text-decoration: none;
+}
+
+.language-switch a:hover,
+.language-switch a[aria-current="true"] {
+  color: rgb(0, 0, 0);
+}
+
 .tree,
 .tree-children {
   list-style: none;
@@ -84,6 +99,11 @@ body {
   color: rgb(0, 0, 0);
 }
 
+#main-prize .tree-toggle.is-open,
+#emerging-artist .tree-toggle.is-open {
+  color: rgb(0, 0, 0);
+}
+
 #about .tree-toggle:hover {
   color: rgb(202, 202, 202);
 }
@@ -114,6 +134,10 @@ body {
   grid-template-columns: max-content 1fr;
 }
 
+#main-prize > .tree-root-row {
+  grid-template-columns: max-content 1fr max-content;
+}
+
 #main-prize > .tree-root-row > p,
 #emerging-artist > .tree-root-row > p {
   margin: 0;
@@ -124,6 +148,13 @@ body {
 #emerging-artist > .tree-root-row > .tree {
   margin: 0;
   padding-left: 0;
+}
+
+#main-prize > .tree-root-row > .language-switch {
+  align-self: start;
+  display: flex;
+  gap: 0.25rem;
+  white-space: nowrap;
 }
 
 #main-prize > .tree-root-row > .tree > li,
@@ -223,6 +254,14 @@ body {
   color: rgb(202, 202, 202);
 }
 
+#main-prize .tree-group .tree-toggle.is-open {
+  color: rgb(0, 0, 0);
+}
+
+#main-prize .tree-group .tree-toggle-artist.has-open-work {
+  color: rgb(0, 0, 0);
+}
+
 /* ㅜline for artist label */
 #main-prize > .tree-root-row > .tree > li:first-child {
   position: relative;
@@ -281,6 +320,14 @@ body {
 
 #emerging-artist .tree-group .tree-toggle {
   color: rgb(202, 202, 202);
+}
+
+#emerging-artist .tree-group .tree-toggle.is-open {
+  color: rgb(0, 0, 0);
+}
+
+#emerging-artist .tree-group .tree-toggle-artist.has-open-work {
+  color: rgb(0, 0, 0);
 }
 
 /* line for work list */
@@ -345,6 +392,24 @@ body {
   top: 0.7rem;
   transform: translateY(-5%);
 }
-
-
+/* de - artist label */
+html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-last {
+  left: -2.05rem;
+}
+/* de - works label */
+html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-emerging-work-line {
+  left: -1.3rem;
+}
+/* de - line for artist label */
+html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-last::before {
+  left: -1.8rem;   /* 좌우 위치 */
+  width: 3.6rem;   /* 선 길이 */
+  top: 55%;        /* 세로 위치 */
+}
+/* de - line for works label */
+html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-emerging-work-line::before {
+  left: -2rem;   /* 좌우 위치 */
+  width: 3.1rem;   /* 선 길이 */
+  top: 55%;        /* 세로 위치 */
+}
 /* EMERGING-ARTIST */
