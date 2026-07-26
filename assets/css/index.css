@@ -42,11 +42,16 @@ body {
   margin-top: 0.25rem;
 }
 
+/* LINE */
 .tree-toggle::before {
   content: "├ ";
 }
 
 .tree-toggle:last-child::before {
+  content: "└ ";
+}
+
+.tree-toggle.tree-toggle-terminal::before {
   content: "└ ";
 }
 
@@ -65,29 +70,32 @@ body {
   content: "└ ";
 }
 
-/* HOVER */
-#main-prize .tree.tree-group .tree-toggle:hover,
-#emerging-artist .tree.tree-group .tree-toggle:hover {
-  color: white;
-}
-
 #data-privacy .tree-toggle::before {
   content: "└ ";
 }
 
+/* LINE */
+
+/* HOVER */
+#main-prize .tree.tree-group .tree-toggle:hover,
+#emerging-artist .tree.tree-group .tree-toggle:hover {
+  color: rgb(0, 0, 0);
+}
+
 #about .tree-toggle:hover {
-  color: white;
+  color: rgb(202, 202, 202);
 }
 
 #imprint .tree-toggle:hover {
-  color: white;
+  color:  rgb(202, 202, 202);
 }
 
 #data-privacy .tree-toggle:hover {
-  color: white;
+  color:  rgb(202, 202, 202);
 }
 /* HOVER */
 
+/* SHARED LAYOUT */
 #main-prize {
   display: block;
 }
@@ -96,7 +104,6 @@ body {
   display: block;
 }
 
-/* main-layout */
 #main-prize > .tree-root-row,
 #emerging-artist > .tree-root-row {
   align-items: flex-start;
@@ -145,14 +152,24 @@ body {
   padding-left: 0;
 }
 
-/* main - name, worklist position  */
+/* SHARED POSITION */
 #main-prize > .tree-root-row > .tree > li > .tree-group,
 #emerging-artist > .tree-root-row > .tree > li > .tree-group {
   margin-left: 4.5rem;
 }
 
-/* main-layout */
+/* MAIN-PRIZE */
+#main-prize .work-images img {
+  display: block;
+  height: auto;
+  max-width: 50rem;
+}
+#main-prize .tree-group .tree-toggle {
+  color: rgb(202, 202, 202);
+}
+/* MAIN-PRIZE */
 
+/* EMERGING-ARTIST */
 #emerging-artist .work-images {
   display: flex;
   flex-wrap: wrap;
@@ -170,7 +187,11 @@ body {
   max-width: 12rem;
 }
 
-/* emerging - name, worklist position  */
 #emerging-artist > .tree-root-row > .tree > li > .tree-group {
   margin-left: -1.47rem;
 }
+
+#emerging-artist .tree-group .tree-toggle {
+  color: rgb(202, 202, 202);
+}
+/* EMERGING-ARTIST */
