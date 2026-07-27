@@ -56,7 +56,15 @@
                           <li class="work-images">
                             <?php foreach ($work->images() as $image): ?>
                               <figure>
-                                <img src="<?= $image->url() ?>" alt="<?= $image->alt()->or($work->title())->html() ?>">
+                                <button
+                                  class="work-image-trigger"
+                                  type="button"
+                                  data-image-src="<?= $image->url() ?>"
+                                  data-image-alt="<?= $image->alt()->or($work->title())->html() ?>"
+                                  aria-label="Open image"
+                                >
+                                  <img src="<?= $image->url() ?>" alt="<?= $image->alt()->or($work->title())->html() ?>">
+                                </button>
                               </figure>
                             <?php endforeach ?>
                           </li>
@@ -147,7 +155,15 @@
                           <li class="work-images">
                             <?php foreach ($work->images() as $image): ?>
                               <figure>
-                                <img src="<?= $image->url() ?>" alt="<?= $image->alt()->or($work->title())->html() ?>">
+                                <button
+                                  class="work-image-trigger"
+                                  type="button"
+                                  data-image-src="<?= $image->url() ?>"
+                                  data-image-alt="<?= $image->alt()->or($work->title())->html() ?>"
+                                  aria-label="Open image"
+                                >
+                                  <img src="<?= $image->url() ?>" alt="<?= $image->alt()->or($work->title())->html() ?>">
+                                </button>
                               </figure>
                             <?php endforeach ?>
                           </li>
@@ -223,6 +239,14 @@
 
 
 
+<div class="image-lightbox" hidden>
+  <button class="image-lightbox-close" type="button" aria-label="Close image">&times;</button>
+  <div class="image-lightbox-backdrop" aria-hidden="true"></div>
+  <div class="image-lightbox-content" role="dialog" aria-modal="true" aria-label="Expanded image">
+    <img class="image-lightbox-image" src="" alt="">
+  </div>
+</div>
+
 <script>
   const updateArtistHighlight = () => {
     document.querySelectorAll("#main-prize, #emerging-artist").forEach((section) => {
@@ -260,6 +284,42 @@
 
       updateArtistHighlight();
     });
+  });
+
+  const lightbox = document.querySelector(".image-lightbox");
+  const lightboxImage = lightbox?.querySelector(".image-lightbox-image");
+  const lightboxClose = () => {
+    if (!lightbox || !lightboxImage) return;
+
+    lightbox.hidden = true;
+    lightboxImage.src = "";
+    lightboxImage.alt = "";
+    document.body.classList.remove("has-image-lightbox");
+  };
+
+  document.querySelectorAll(".work-image-trigger").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      if (!lightbox || !lightboxImage) return;
+
+      lightboxImage.src = trigger.dataset.imageSrc ?? "";
+      lightboxImage.alt = trigger.dataset.imageAlt ?? "";
+      lightbox.hidden = false;
+      document.body.classList.add("has-image-lightbox");
+    });
+  });
+
+  lightbox?.addEventListener("click", (event) => {
+    const clickedClose = event.target.closest(".image-lightbox-close, .image-lightbox-backdrop");
+
+    if (clickedClose) {
+      lightboxClose();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && lightbox && lightbox.hidden === false) {
+      lightboxClose();
+    }
   });
 
   updateArtistHighlight();

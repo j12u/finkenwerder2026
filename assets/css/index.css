@@ -57,6 +57,87 @@ body {
   margin-top: 0.25rem;
 }
 
+body.has-image-lightbox {
+  overflow: hidden;
+}
+
+.work-image-trigger {
+  appearance: none;
+  background: none;
+  border: 0;
+  cursor: zoom-in;
+  display: block;
+  padding: 0;
+  width: 100%;
+}
+
+.work-image-trigger img {
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.work-image-trigger:hover img,
+.work-image-trigger:focus-visible img {
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.12);
+  filter: brightness(1.03);
+  transform: translateY(-0.1rem) scale(1.01);
+}
+
+.work-image-trigger:focus-visible {
+  outline: none;
+}
+
+.image-lightbox {
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  z-index: 1000;
+}
+
+.image-lightbox[hidden] {
+  display: none;
+}
+
+.image-lightbox-backdrop {
+  background: rgba(255, 255, 255, 0.94);
+  inset: 0;
+  position: absolute;
+}
+
+.image-lightbox-content {
+  min-height: 100vh;
+  position: relative;
+  width: 100vw;
+  z-index: 1;
+}
+
+.image-lightbox-image {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: none;
+  width: calc(100vw - 1rem);
+}
+
+.image-lightbox-close {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  font: inherit;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 2;
+}
+
 /* LINE */
 .tree-toggle::before {
   content: "┣ ";
@@ -250,6 +331,11 @@ body {
   height: auto;
   max-width: 50rem;
 }
+
+#main-prize .work-images figure {
+  margin: 0;
+}
+
 #main-prize .tree-group .tree-toggle {
   color: rgb(202, 202, 202);
 }
@@ -402,13 +488,13 @@ html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-emerging-work-line {
 }
 /* de - line for artist label */
 html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-last::before {
-  left: -1.8rem;   /* 좌우 위치 */
+  left: -1.8rem;   
   width: 3.6rem;   /* 선 길이 */
   top: 55%;        /* 세로 위치 */
 }
 /* de - line for works label */
 html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-emerging-work-line::before {
-  left: -2rem;   /* 좌우 위치 */
+  left: -2rem;   
   width: 3.1rem;   /* 선 길이 */
   top: 55%;        /* 세로 위치 */
 }
