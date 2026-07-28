@@ -38,19 +38,36 @@
                   <?php foreach ($mainPrizeWorks as $work): ?>
                     <?php $isTerminalWork = in_array($work->uid(), ['silent-force-red-caress', 'being-strong-is-hard'], true); ?>
                     <?php $isFirstMainWork = $work->is($mainPrizeWorks->first()); ?>
+                    <?php $hasMainWorkDetails = $work->year()->isNotEmpty() || $work->material()->isNotEmpty() || $work->description()->isNotEmpty(); ?>
                     <li>
                       <button class="tree-toggle<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?><?= $isFirstMainWork ? ' tree-toggle-main-first-work' : '' ?>" type="button" aria-expanded="false">
                         <?= $work->title()->html() ?>
                       </button>
                       <ul class="tree-children">
-                        <?php if ($work->year()->isNotEmpty()): ?>
-                          <li>Year: <?= $work->year()->html() ?></li>
-                        <?php endif ?>
-                        <?php if ($work->material()->isNotEmpty()): ?>
-                          <li>Material: <?= $work->material()->html() ?></li>
-                        <?php endif ?>
-                        <?php if ($work->description()->isNotEmpty()): ?>
-                          <li><?= $work->description()->kt() ?></li>
+                        <?php if ($hasMainWorkDetails): ?>
+                          <li class="work-details-group">
+                            <p class="work-details-title">Details</p>
+                            <ul class="work-details-list">
+                              <?php if ($work->year()->isNotEmpty()): ?>
+                                <li class="work-details-item">
+                                  <p>Year</p>
+                                  <div class="work-details-value"><?= $work->year()->html() ?></div>
+                                </li>
+                              <?php endif ?>
+                              <?php if ($work->material()->isNotEmpty()): ?>
+                                <li class="work-details-item">
+                                  <p>Material</p>
+                                  <div class="work-details-value"><?= $work->material()->html() ?></div>
+                                </li>
+                              <?php endif ?>
+                              <?php if ($work->description()->isNotEmpty()): ?>
+                                <li class="work-details-item">
+                                  <p>Description</p>
+                                  <div class="work-details-value"><?= $work->description()->kt() ?></div>
+                                </li>
+                              <?php endif ?>
+                            </ul>
+                          </li>
                         <?php endif ?>
                         <?php if ($work->images()->isNotEmpty()): ?>
                           <li class="work-images">
@@ -128,28 +145,54 @@
                   <?php foreach ($emergingWorks as $work): ?>
                     <?php $isTerminalWork = $work->uid() === 'silent-force-red-caress'; ?>
                     <?php $isEmergingLineWork = $work->uid() === 'being-strong-is-hard'; ?>
+                    <?php $hasEmergingWorkDetails = $work->year()->isNotEmpty() || $work->medium()->isNotEmpty() || $work->duration()->isNotEmpty() || $work->dimensions()->isNotEmpty() || $work->courtesy()->isNotEmpty() || $work->description()->isNotEmpty(); ?>
                     <li>
                       <button class="tree-toggle<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?><?= $isEmergingLineWork ? ' tree-toggle-emerging-work-line' : '' ?>" type="button" aria-expanded="false">
                         <?= $work->title()->html() ?>
                       </button>
                       <ul class="tree-children">
-                        <?php if ($work->year()->isNotEmpty()): ?>
-                          <li>Year: <?= $work->year()->html() ?></li>
-                        <?php endif ?>
-                        <?php if ($work->medium()->isNotEmpty()): ?>
-                          <li>Medium: <?= $work->medium()->html() ?></li>
-                        <?php endif ?>
-                        <?php if ($work->duration()->isNotEmpty()): ?>
-                          <li>Duration: <?= $work->duration()->html() ?></li>
-                        <?php endif ?>
-                        <?php if ($work->dimensions()->isNotEmpty()): ?>
-                          <li>Dimensions: <?= $work->dimensions()->html() ?></li>
-                        <?php endif ?>
-                        <?php if ($work->courtesy()->isNotEmpty()): ?>
-                          <li>Courtesy: <?= $work->courtesy()->html() ?></li>
-                        <?php endif ?>
-                        <?php if ($work->description()->isNotEmpty()): ?>
-                          <li><?= $work->description()->kt() ?></li>
+                        <?php if ($hasEmergingWorkDetails): ?>
+                          <li class="work-details-group">
+                            <p class="work-details-title">Details</p>
+                            <ul class="work-details-list">
+                              <?php if ($work->year()->isNotEmpty()): ?>
+                                <li class="work-details-item">
+                                  <p>Year</p>
+                                  <div class="work-details-value"><?= $work->year()->html() ?></div>
+                                </li>
+                              <?php endif ?>
+                              <?php if ($work->medium()->isNotEmpty()): ?>
+                                <li class="work-details-item">
+                                  <p>Medium</p>
+                                  <div class="work-details-value"><?= $work->medium()->html() ?></div>
+                                </li>
+                              <?php endif ?>
+                              <?php if ($work->duration()->isNotEmpty()): ?>
+                                <li class="work-details-item">
+                                  <p>Duration</p>
+                                  <div class="work-details-value"><?= $work->duration()->html() ?></div>
+                                </li>
+                              <?php endif ?>
+                              <?php if ($work->dimensions()->isNotEmpty()): ?>
+                                <li class="work-details-item">
+                                  <p>Dimensions</p>
+                                  <div class="work-details-value"><?= $work->dimensions()->html() ?></div>
+                                </li>
+                              <?php endif ?>
+                              <?php if ($work->courtesy()->isNotEmpty()): ?>
+                                <li class="work-details-item">
+                                  <p>Courtesy</p>
+                                  <div class="work-details-value"><?= $work->courtesy()->html() ?></div>
+                                </li>
+                              <?php endif ?>
+                              <?php if ($work->description()->isNotEmpty()): ?>
+                                <li class="work-details-item">
+                                  <p>Description</p>
+                                  <div class="work-details-value"><?= $work->description()->kt() ?></div>
+                                </li>
+                              <?php endif ?>
+                            </ul>
+                          </li>
                         <?php endif ?>
                         <?php if ($work->images()->isNotEmpty()): ?>
                           <li class="work-images">

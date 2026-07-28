@@ -57,6 +57,50 @@ body {
   margin-top: 0.25rem;
 }
 
+.work-details-group {
+  align-items: flex-start;
+  column-gap: -1.5rem;
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  margin-left: -1.25rem;
+}
+/* main - details group */
+#main-prize .work-details-group {
+  margin-left: -13.8rem;
+}
+
+.work-details-title,
+.work-details-item > p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.work-details-title::before {
+  content: "┗ ";
+}
+
+.work-details-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.work-details-item {
+  align-items: flex-start;
+  column-gap: 0.8rem;
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+}
+
+.work-details-value > :first-child {
+  margin-top: 0;
+}
+
+.work-details-value > :last-child {
+  margin-bottom: 0;
+}
+/* main - details group */
+
 body.has-image-lightbox {
   overflow: hidden;
 }
@@ -271,11 +315,13 @@ body.has-image-lightbox {
   padding-left: 0;
 }
 
-/* SHARED POSITION */
+
 #main-prize > .tree-root-row > .tree > li > .tree-group,
 #emerging-artist > .tree-root-row > .tree > li > .tree-group {
   margin-left: 4.5rem;
 }
+
+
 
 /* MAIN-PRIZE */
 
