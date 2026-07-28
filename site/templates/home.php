@@ -7,10 +7,14 @@
     $mainPrizeWorks = $mainPrize->children()->listed()->filterBy('intendedTemplate', 'main-prize-work');
     ?>
 
-    <?php if ($mainPrizeArtist || $mainPrizeWorks->isNotEmpty()): ?>
-      <section class="landing-section" id="main-prize">
-        <div class="tree-root-row">
-          <p><?= $mainPrize->title()->html() ?></p>
+	    <?php if ($mainPrizeArtist || $mainPrizeWorks->isNotEmpty()): ?>
+	      <section class="landing-section" id="main-prize">
+	        <div class="tree-root-row">
+	          <p>
+	            <a class="main-prize-home-link" href="<?= $page->url() ?>" aria-disabled="true" tabindex="-1">
+	              <?= $mainPrize->title()->html() ?>
+	            </a>
+	          </p>
 
           <ul class="tree">
             <?php if ($mainPrizeArtist): ?>
@@ -50,19 +54,19 @@
                             <ul class="work-details-list">
                               <?php if ($work->year()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p>Year</p>
+                                  <p class="work-details-label-year">Year</p>
                                   <div class="work-details-value"><?= $work->year()->html() ?></div>
                                 </li>
                               <?php endif ?>
                               <?php if ($work->material()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p>Material</p>
+                                  <p class="work-details-label-branch">Material</p>
                                   <div class="work-details-value"><?= $work->material()->html() ?></div>
                                 </li>
                               <?php endif ?>
                               <?php if ($work->description()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p>Description</p>
+                                  <p class="work-details-label-end">Description</p>
                                   <div class="work-details-value"><?= $work->description()->kt() ?></div>
                                 </li>
                               <?php endif ?>
@@ -157,7 +161,7 @@
                             <ul class="work-details-list">
                               <?php if ($work->year()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p>Year</p>
+                                  <p class="work-details-label-year">Year</p>
                                   <div class="work-details-value"><?= $work->year()->html() ?></div>
                                 </li>
                               <?php endif ?>
@@ -187,7 +191,7 @@
                               <?php endif ?>
                               <?php if ($work->description()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p>Description</p>
+                                  <p class="work-details-label-end">Description</p>
                                   <div class="work-details-value"><?= $work->description()->kt() ?></div>
                                 </li>
                               <?php endif ?>
@@ -302,6 +306,19 @@
     });
   };
 
+  const updateMainPrizeHomeLink = () => {
+    const homeLink = document.querySelector(".main-prize-home-link");
+    const hasOpenMainPrizePanel = Boolean(
+      document.querySelector("#main-prize .tree-toggle.is-open")
+    );
+
+    if (!homeLink) return;
+
+    homeLink.setAttribute("aria-disabled", hasOpenMainPrizePanel ? "false" : "true");
+    homeLink.tabIndex = hasOpenMainPrizePanel ? 0 : -1;
+    homeLink.classList.toggle("is-active", hasOpenMainPrizePanel);
+  };
+
   document.querySelectorAll(".tree-toggle").forEach((toggle) => {
     toggle.addEventListener("click", () => {
       const nested = toggle.nextElementSibling;
@@ -326,8 +343,18 @@
       }
 
       updateArtistHighlight();
+      updateMainPrizeHomeLink();
     });
   });
+
+  document.querySelector(".main-prize-home-link")?.addEventListener("click", (event) => {
+    if (event.currentTarget.getAttribute("aria-disabled") === "true") {
+      event.preventDefault();
+    }
+  });
+
+  updateArtistHighlight();
+  updateMainPrizeHomeLink();
 
   const lightbox = document.querySelector(".image-lightbox");
   const lightboxImage = lightbox?.querySelector(".image-lightbox-image");

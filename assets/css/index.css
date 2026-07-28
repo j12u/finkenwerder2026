@@ -61,12 +61,12 @@ body {
   align-items: flex-start;
   column-gap: -1.5rem;
   display: grid;
-  grid-template-columns: 6rem 1fr;
+  grid-template-columns: 4.8rem 1fr;
   margin-left: -1.25rem;
 }
 /* main - details group */
 #main-prize .work-details-group {
-  margin-left: -13.8rem;
+  margin-left: -13.5rem;
 }
 
 .work-details-title,
@@ -79,15 +79,35 @@ body {
   content: "┗ ";
 }
 
+.work-details-label-year::before {
+  content: "ㅜ ";
+}
+
+.work-details-label-branch::before {
+  content: "┣ ";
+}
+
+.work-details-label-end::before {
+  content: "┗ ";
+}
+
 .work-details-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+.work-details-list > .work-details-item {
+  margin-top: 0;
+}
+
+.work-details-list > .work-details-item + .work-details-item {
+  margin-top: 0.7rem;
+}
+
 .work-details-item {
   align-items: flex-start;
-  column-gap: 0.8rem;
+  column-gap: 1.8rem;
   display: grid;
   grid-template-columns: 7rem 1fr;
 }
@@ -267,6 +287,23 @@ body.has-image-lightbox {
 #emerging-artist > .tree-root-row > p {
   margin: 0;
   white-space: nowrap;
+}
+
+.main-prize-home-link {
+  color: inherit;
+  cursor: default;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.main-prize-home-link.is-active {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.main-prize-home-link.is-active:hover,
+.main-prize-home-link.is-active:focus-visible {
+  color: rgb(202, 202, 202);
 }
 
 #main-prize > .tree-root-row > .tree,
