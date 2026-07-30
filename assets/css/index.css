@@ -352,10 +352,10 @@ body.has-image-lightbox {
   padding-left: 0;
 }
 
-
+/* work list position */
 #main-prize > .tree-root-row > .tree > li > .tree-group,
 #emerging-artist > .tree-root-row > .tree > li > .tree-group {
-  margin-left: 4.5rem;
+  margin-left: 10rem;
 }
 
 
@@ -369,7 +369,7 @@ body.has-image-lightbox {
   position: relative;
 }
 
-/* line for main-prize artist */
+/* line for artist */
 #main-prize .tree-toggle.tree-toggle-main-artist::before {
   content: "";
   border-top: 1px solid currentColor;
@@ -457,6 +457,17 @@ body.has-image-lightbox {
   top: 0.82rem;
   transform: translateY(-5%);
 }
+/* line for artist */
+html[lang="de"] #main-prize .tree-toggle.tree-toggle-main-artist::before {
+  left: -15rem;
+  width: 15.8rem;
+}
+
+/* line for work */
+html[lang="de"] #main-prize .tree-toggle.tree-toggle-main-first-work::before {
+  left: -14.6rem;
+  width: 15.5rem;
+}
 
 /* MAIN-PRIZE */
 
@@ -520,7 +531,7 @@ body.has-image-lightbox {
 /* artist name - position */
 #emerging-artist .tree-toggle.tree-toggle-last {
   top: -0.07rem;
-  left: -0.7rem;
+  left: 4.7rem;
 }
 
 /* ㅜline for emerging - hor*/
@@ -561,9 +572,9 @@ body.has-image-lightbox {
   top: 0.7rem;
   transform: translateY(-5%);
 }
-/* de - artist label */
+/* de - artist name */
 html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-last {
-  left: -2.05rem;
+  left: 3.45rem;
 }
 /* de - works label */
 html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-emerging-work-line {
@@ -571,14 +582,43 @@ html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-emerging-work-line {
 }
 /* de - line for artist label */
 html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-last::before {
-  left: -1.8rem;   
-  width: 3.6rem;   /* 선 길이 */
+  left: -7rem;   
+  width: 8.7rem;   /* 선 길이 */
   top: 55%;        /* 세로 위치 */
 }
 /* de - line for works label */
 html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-emerging-work-line::before {
-  left: -2rem;   
-  width: 3.1rem;   /* 선 길이 */
+  left: -7.3rem;   
+  width: 8.2rem;   /* 선 길이 */
   top: 55%;        /* 세로 위치 */
+}
+
+html[lang="de"] #emerging-artist > .tree-root-row > .tree > li:first-child .tree-children {
+  padding-left: 5.4rem;
+}
+
+/* details group position */
+#emerging-artist .work-details-group {
+  margin-left: -7.7rem;
+}
+/* work list position */
+#emerging-artist > .tree-root-row > .tree > li:last-child > .tree-group {
+  margin-left: 4rem;
+}
+/* details group position */
+html[lang="de"] #emerging-artist .work-details-group {
+  margin-left: -13rem;
+}
+/* details text position */
+html[lang="de"] #emerging-artist .work-details-value {
+  margin-left: -1.6rem;
+}
+/* image position */
+html[lang="de"] #emerging-artist .work-images {
+  margin-left: -1.25rem;
+}
+/* details - year label position */
+html[lang="de"] #emerging-artist .work-details-group {
+  grid-template-columns: 4.5rem 1fr;
 }
 /* EMERGING-ARTIST */

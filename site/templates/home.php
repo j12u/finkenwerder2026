@@ -54,19 +54,19 @@
                             <ul class="work-details-list">
                               <?php if ($work->year()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p class="work-details-label-year">Year</p>
+                                  <p class="work-details-label-year">Year:</p>
                                   <div class="work-details-value"><?= $work->year()->html() ?></div>
                                 </li>
                               <?php endif ?>
                               <?php if ($work->material()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p class="work-details-label-branch">Material</p>
+                                  <p class="work-details-label-branch">Material:</p>
                                   <div class="work-details-value"><?= $work->material()->html() ?></div>
                                 </li>
                               <?php endif ?>
                               <?php if ($work->description()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p class="work-details-label-end">Description</p>
+                                  <p class="work-details-label-end">Description:</p>
                                   <div class="work-details-value"><?= $work->description()->kt() ?></div>
                                 </li>
                               <?php endif ?>
@@ -161,37 +161,37 @@
                             <ul class="work-details-list">
                               <?php if ($work->year()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p class="work-details-label-year">Year</p>
+                                  <p class="work-details-label-year">Year:</p>
                                   <div class="work-details-value"><?= $work->year()->html() ?></div>
                                 </li>
                               <?php endif ?>
                               <?php if ($work->medium()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p>Medium</p>
+                                  <p>┣ Medium:</p>
                                   <div class="work-details-value"><?= $work->medium()->html() ?></div>
                                 </li>
                               <?php endif ?>
                               <?php if ($work->duration()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p>Duration</p>
+                                  <p>┣ Duration:</p>
                                   <div class="work-details-value"><?= $work->duration()->html() ?></div>
                                 </li>
                               <?php endif ?>
                               <?php if ($work->dimensions()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p>Dimensions</p>
+                                  <p>┣ Dimensions:</p>
                                   <div class="work-details-value"><?= $work->dimensions()->html() ?></div>
                                 </li>
                               <?php endif ?>
                               <?php if ($work->courtesy()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p>Courtesy</p>
+                                  <p>┣ Courtesy:</p>
                                   <div class="work-details-value"><?= $work->courtesy()->html() ?></div>
                                 </li>
                               <?php endif ?>
                               <?php if ($work->description()->isNotEmpty()): ?>
                                 <li class="work-details-item">
-                                  <p class="work-details-label-end">Description</p>
+                                  <p class="work-details-label-end">Description:</p>
                                   <div class="work-details-value"><?= $work->description()->kt() ?></div>
                                 </li>
                               <?php endif ?>
