@@ -360,6 +360,7 @@ body.has-image-lightbox {
 
 
 
+
 /* MAIN-PRIZE */
 
 /* artist name position */
@@ -373,11 +374,11 @@ body.has-image-lightbox {
 #main-prize .tree-toggle.tree-toggle-main-artist::before {
   content: "";
   border-top: 1px solid currentColor;
-  left: -9.65rem;
+  left: -15.15rem;
   position: absolute;
   top: 55%;
   transform: translateY(-50%);
-  width: 10.5rem;
+  width: 16rem;
 }
 
 /* line for first work - work list */
@@ -392,10 +393,10 @@ body.has-image-lightbox {
   content: "";
   border-top: 1px solid currentColor;
   position: absolute;
-  left: -9.2rem;
+  left: -14.6rem;
   top: 0.82rem;
   transform: translateY(-50%);
-  width: 10.2rem;
+  width: 15.6rem;
 }
 
 /* first work line - ver */
@@ -468,7 +469,17 @@ html[lang="de"] #main-prize .tree-toggle.tree-toggle-main-first-work::before {
   left: -14.6rem;
   width: 15.5rem;
 }
+/* details label */
+html[lang="en"] #main-prize .work-details-title,
+html[lang="en"] #main-prize .work-details-item > p {
+  margin-left: -6rem;
+}
 
+html[lang="en"] #main-prize .work-details-item > .work-details-label-year,
+html[lang="en"] #main-prize .work-details-item > .work-details-label-branch,
+html[lang="en"] #main-prize .work-details-item > .work-details-label-end {
+  margin-left: 1.5rem;
+}
 /* MAIN-PRIZE */
 
 /* EMERGING-ARTIST */
@@ -517,15 +528,15 @@ html[lang="de"] #main-prize .tree-toggle.tree-toggle-main-first-work::before {
   position: relative;
 }
 
-/* line for work list - hor */
+/* line for work list */
 #emerging-artist .tree-toggle.tree-toggle-emerging-work-line::before {
   content: "";
   border-top: 1px solid currentColor;
-  left: -3.1rem;
+  left: -8.5rem;
   position: absolute;
   top: 55%;
   transform: translateY(-50%);
-  width: 4.1rem;
+  width: 9.5rem;
 }
 
 /* artist name - position */
@@ -534,7 +545,7 @@ html[lang="de"] #main-prize .tree-toggle.tree-toggle-main-first-work::before {
   left: 4.7rem;
 }
 
-/* ㅜline for emerging - hor*/
+/* line for emerging artist name*/
 #emerging-artist .tree-toggle.tree-toggle-last::before {
   content: "";
   border-top: 1px solid currentColor;
@@ -543,7 +554,7 @@ html[lang="de"] #main-prize .tree-toggle.tree-toggle-main-first-work::before {
   right: calc(100% - 1.6rem);
   top: 55%;
   transform: translateY(-50%);
-  width: 4.5rem;
+  width: 10rem;
 }
 
 /* ㅜline for artist label */
@@ -595,6 +606,10 @@ html[lang="de"] #emerging-artist .tree-toggle.tree-toggle-emerging-work-line::be
 
 html[lang="de"] #emerging-artist > .tree-root-row > .tree > li:first-child .tree-children {
   padding-left: 5.4rem;
+}
+
+html[lang="en"] #emerging-artist > .tree-root-row > .tree > li:first-child .tree-children {
+  padding-left: 6.65rem;
 }
 
 /* details group position */
