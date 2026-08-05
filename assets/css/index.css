@@ -280,7 +280,7 @@ body.has-image-lightbox {
 }
 
 #main-prize > .tree-root-row {
-  grid-template-columns: max-content 1fr max-content;
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
 }
 
 #main-prize > .tree-root-row > p,
@@ -309,6 +309,7 @@ body.has-image-lightbox {
 #main-prize > .tree-root-row > .tree,
 #emerging-artist > .tree-root-row > .tree {
   margin: 0;
+  min-width: 0;
   padding-left: 0;
 }
 
@@ -316,6 +317,7 @@ body.has-image-lightbox {
   align-self: start;
   display: flex;
   gap: 0.25rem;
+  justify-self: end;
   white-space: nowrap;
 }
 
@@ -469,6 +471,32 @@ html[lang="de"] #main-prize .tree-toggle.tree-toggle-main-first-work::before {
   left: -14.6rem;
   width: 15.5rem;
 }
+
+html[lang="de"] #main-prize .work-details-item > .work-details-label-year {
+  padding-left: 1rem;
+  position: relative;
+}
+
+/* de - line for year label */
+html[lang="de"] #main-prize .work-details-label-year::before {
+  content: "";
+  border-top: 1px solid currentColor;
+  position: absolute;
+  left: -7.5rem;
+  top: 0.78rem;
+  transform: translateY(-50%);
+  width: 8.4rem;
+}
+
+html[lang="de"] #main-prize .work-details-label-year::after {
+  content: "";
+  border-left: 1px solid currentColor;
+  height: 0.45em;
+  position: absolute;
+  left: 0.48rem;
+  top: 0.78rem;
+  transform: translateY(-5%);
+}
 /* details label */
 html[lang="en"] #main-prize .work-details-title,
 html[lang="en"] #main-prize .work-details-item > p {
@@ -480,6 +508,47 @@ html[lang="en"] #main-prize .work-details-item > .work-details-label-branch,
 html[lang="en"] #main-prize .work-details-item > .work-details-label-end {
   margin-left: 1.5rem;
 }
+/* en - line for year label */
+html[lang="en"] #main-prize .work-details-label-year::before {
+  content: "";
+  border-top: 1px solid currentColor;
+  position: absolute;
+  left: -7.5rem;
+  top: 0.78rem;
+  transform: translateY(-50%);
+  width: 8.4rem;
+}
+
+html[lang="en"] #main-prize .work-details-item > .work-details-label-year {
+  padding-left: 1rem;
+  position: relative;
+}
+
+html[lang="en"] #main-prize .work-details-label-year::after {
+  content: "";
+  border-left: 1px solid currentColor;
+  height: 0.45em;
+  position: absolute;
+  left: 0.48rem;
+  top: 0.78rem;
+  transform: translateY(-5%);
+}
+
+/* de - details group */
+html[lang="de"] #main-prize .work-details-group {
+  margin-left: -19.5rem;
+}
+
+/* de - details group - label */
+html[lang="de"] #main-prize .work-details-item > p {
+  margin-left: 7.3rem;
+}
+
+/* de - details group - label text */
+html[lang="de"] #main-prize .work-details-value {
+  margin-left: 6rem;
+}
+
 /* MAIN-PRIZE */
 
 /* EMERGING-ARTIST */
@@ -614,7 +683,7 @@ html[lang="en"] #emerging-artist > .tree-root-row > .tree > li:first-child .tree
 
 /* details group position */
 #emerging-artist .work-details-group {
-  margin-left: -7.7rem;
+  margin-left: -13.5rem;
 }
 /* work list position */
 #emerging-artist > .tree-root-row > .tree > li:last-child > .tree-group {
