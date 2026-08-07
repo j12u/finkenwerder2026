@@ -38,13 +38,12 @@
             <?php if ($mainPrizeWorks->isNotEmpty()): ?>
               <li>
                 <p>Works</p>
-                <ul class="tree tree-group">
+                <ul class="tree tree-group main-prize-work-list">
                   <?php foreach ($mainPrizeWorks as $work): ?>
                     <?php $isTerminalWork = in_array($work->uid(), ['silent-force-red-caress', 'being-strong-is-hard'], true); ?>
-                    <?php $isFirstMainWork = $work->is($mainPrizeWorks->first()); ?>
                     <?php $hasMainWorkDetails = $work->year()->isNotEmpty() || $work->material()->isNotEmpty() || $work->description()->isNotEmpty(); ?>
                     <li>
-                      <button class="tree-toggle<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?><?= $isFirstMainWork ? ' tree-toggle-main-first-work' : '' ?>" type="button" aria-expanded="false">
+                      <button class="tree-toggle<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?>" type="button" aria-expanded="false">
                         <?= $work->title()->html() ?>
                       </button>
                       <ul class="tree-children">
@@ -319,6 +318,68 @@
     homeLink.classList.toggle("is-active", hasOpenMainPrizePanel);
   };
 
+  const closeAllPanels = () => {
+    document.querySelectorAll(".tree-children.is-open").forEach((child) => {
+      child.classList.remove("is-open");
+    });
+
+    document.querySelectorAll(".tree-toggle.is-open").forEach((openToggle) => {
+      openToggle.classList.remove("is-open");
+      openToggle.setAttribute("aria-expanded", "false");
+    });
+  };
+
+  const mainPrizeWorkList = document.querySelector("#main-prize .main-prize-work-list");
+  const mainPrizeWorkItems = mainPrizeWorkList ? [...mainPrizeWorkList.children] : [];
+
+  const resetMainPrizeWorkOrder = () => {
+    if (!mainPrizeWorkList) return;
+
+    mainPrizeWorkItems.forEach((item) => {
+      mainPrizeWorkList.append(item);
+    });
+  };
+
+  const moveMainPrizeWorkToTop = (toggle) => {
+    if (!mainPrizeWorkList) return;
+
+    const item = toggle.closest("li");
+
+    if (!item) return;
+
+    mainPrizeWorkList.prepend(item);
+  };
+
+  const animateMainPrizeWorkList = (change) => {
+    if (!mainPrizeWorkList) {
+      change();
+      return;
+    }
+
+    const oldPositions = new Map();
+
+    mainPrizeWorkItems.forEach((item) => {
+      oldPositions.set(item, item.getBoundingClientRect().top);
+    });
+
+    change();
+
+    mainPrizeWorkItems.forEach((item) => {
+      const oldTop = oldPositions.get(item);
+      const newTop = item.getBoundingClientRect().top;
+
+      item.style.transition = "none";
+      item.style.transform = `translateY(${oldTop - newTop}px)`;
+    });
+
+    requestAnimationFrame(() => {
+      mainPrizeWorkItems.forEach((item) => {
+        item.style.transition = "transform 0.4s";
+        item.style.transform = "";
+      });
+    });
+  };
+
   document.querySelectorAll(".tree-toggle").forEach((toggle) => {
     toggle.addEventListener("click", () => {
       const nested = toggle.nextElementSibling;
@@ -326,21 +387,26 @@
       if (!nested) return;
 
       const isOpen = nested.classList.contains("is-open");
+      const isMainPrizeWorkToggle = Boolean(
+        mainPrizeWorkList &&
+        mainPrizeWorkList.contains(toggle) &&
+        toggle.classList.contains("tree-toggle-artist") === false
+      );
 
-      document.querySelectorAll(".tree-children.is-open").forEach((child) => {
-        child.classList.remove("is-open");
+      animateMainPrizeWorkList(() => {
+        closeAllPanels();
+        resetMainPrizeWorkOrder();
+
+        if (!isOpen) {
+          if (isMainPrizeWorkToggle) {
+            moveMainPrizeWorkToTop(toggle);
+          }
+
+          nested.classList.add("is-open");
+          toggle.classList.add("is-open");
+          toggle.setAttribute("aria-expanded", "true");
+        }
       });
-
-      document.querySelectorAll(".tree-toggle.is-open").forEach((openToggle) => {
-        openToggle.classList.remove("is-open");
-        openToggle.setAttribute("aria-expanded", "false");
-      });
-
-      if (!isOpen) {
-        nested.classList.add("is-open");
-        toggle.classList.add("is-open");
-        toggle.setAttribute("aria-expanded", "true");
-      }
 
       updateArtistHighlight();
       updateMainPrizeHomeLink();

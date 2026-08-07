@@ -45,12 +45,18 @@ body {
 }
 
 .tree-children {
-  display: none;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
   padding-left: 1.25rem;
+  transition:
+    max-height 0.35s ease,
+    opacity 0.2s ease;
 }
 
 .tree-children.is-open {
-  display: block;
+  max-height: 200rem;
+  opacity: 1;
 }
 
 .tree-children li {
@@ -384,14 +390,14 @@ body.has-image-lightbox {
 }
 
 /* line for first work - work list */
-#main-prize .tree-toggle.tree-toggle-main-first-work {
+#main-prize .main-prize-work-list > li:first-child > .tree-toggle {
   display: inline-block;
   padding-left: 1.2rem;
   position: relative;
 }
 
 /* first work line - hor */
-#main-prize .tree-toggle.tree-toggle-main-first-work::before {
+#main-prize .main-prize-work-list > li:first-child > .tree-toggle::before {
   content: "";
   border-top: 1px solid currentColor;
   position: absolute;
@@ -402,7 +408,7 @@ body.has-image-lightbox {
 }
 
 /* first work line - ver */
-#main-prize .tree-toggle.tree-toggle-main-first-work::after {
+#main-prize .main-prize-work-list > li:first-child > .tree-toggle::after {
   content: "";
   border-left: 1px solid currentColor;
   height: 0.45em;
@@ -420,6 +426,14 @@ body.has-image-lightbox {
 
 #main-prize .work-images figure {
   margin: 0;
+}
+
+#main-prize .main-prize-work-list > li:not(:first-child):not(:last-child) > .tree-toggle::before {
+  content: "┣ ";
+}
+
+#main-prize .main-prize-work-list > li:not(:first-child):last-child > .tree-toggle::before {
+  content: "┗ ";
 }
 
 #main-prize .tree-group .tree-toggle {
@@ -467,7 +481,7 @@ html[lang="de"] #main-prize .tree-toggle.tree-toggle-main-artist::before {
 }
 
 /* line for work */
-html[lang="de"] #main-prize .tree-toggle.tree-toggle-main-first-work::before {
+html[lang="de"] #main-prize .main-prize-work-list > li:first-child > .tree-toggle::before {
   left: -14.6rem;
   width: 15.5rem;
 }
