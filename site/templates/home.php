@@ -42,8 +42,14 @@
                   <?php foreach ($mainPrizeWorks as $work): ?>
                     <?php $isTerminalWork = in_array($work->uid(), ['silent-force-red-caress', 'being-strong-is-hard'], true); ?>
                     <?php $hasMainWorkDetails = $work->year()->isNotEmpty() || $work->material()->isNotEmpty() || $work->description()->isNotEmpty(); ?>
+                    <?php $hoverImage = $work->images()->first(); ?>
                     <li>
-                      <button class="tree-toggle<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?>" type="button" aria-expanded="false">
+                      <button
+                        class="tree-toggle work-hover-trigger<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?>"
+                        type="button"
+                        aria-expanded="false"
+                        data-hover-image="<?= $hoverImage ? $hoverImage->resize(1600)->url() : '' ?>"
+                      >
                         <?= $work->title()->html() ?>
                       </button>
                       <ul class="tree-children">
@@ -149,8 +155,14 @@
                     <?php $isTerminalWork = $work->uid() === 'silent-force-red-caress'; ?>
                     <?php $isEmergingLineWork = $work->uid() === 'being-strong-is-hard'; ?>
                     <?php $hasEmergingWorkDetails = $work->year()->isNotEmpty() || $work->medium()->isNotEmpty() || $work->duration()->isNotEmpty() || $work->dimensions()->isNotEmpty() || $work->courtesy()->isNotEmpty() || $work->description()->isNotEmpty(); ?>
+                    <?php $hoverImage = $work->images()->first(); ?>
                     <li>
-                      <button class="tree-toggle<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?><?= $isEmergingLineWork ? ' tree-toggle-emerging-work-line' : '' ?>" type="button" aria-expanded="false">
+                      <button
+                        class="tree-toggle work-hover-trigger<?= $isTerminalWork ? ' tree-toggle-terminal' : '' ?><?= $isEmergingLineWork ? ' tree-toggle-emerging-work-line' : '' ?>"
+                        type="button"
+                        aria-expanded="false"
+                        data-hover-image="<?= $hoverImage ? $hoverImage->resize(1600)->url() : '' ?>"
+                      >
                         <?= $work->title()->html() ?>
                       </button>
                       <ul class="tree-children">
@@ -293,6 +305,10 @@
   </div>
 </div>
 
+<div class="work-hover-preview" aria-hidden="true">
+  <img class="work-hover-preview-image" src="" alt="">
+</div>
+
 <script>
   const updateArtistHighlight = () => {
     document.querySelectorAll("#main-prize, #emerging-artist").forEach((section) => {
@@ -421,6 +437,44 @@
 
   updateArtistHighlight();
   updateMainPrizeHomeLink();
+
+  const workHoverPreview = document.querySelector(".work-hover-preview");
+  const workHoverPreviewImage = workHoverPreview?.querySelector(".work-hover-preview-image");
+  const showWorkHoverPreview = (src) => {
+    if (!workHoverPreview || !workHoverPreviewImage || !src) return;
+
+    workHoverPreviewImage.src = src;
+    workHoverPreview.classList.add("is-visible");
+  };
+
+  const hideWorkHoverPreview = () => {
+    if (!workHoverPreview || !workHoverPreviewImage) return;
+
+    workHoverPreview.classList.remove("is-visible");
+    workHoverPreviewImage.src = "";
+  };
+
+  document.querySelectorAll(".work-hover-trigger").forEach((trigger) => {
+    const previewImage = trigger.dataset.hoverImage ?? "";
+
+    if (!previewImage) return;
+
+    trigger.addEventListener("mouseenter", () => {
+      showWorkHoverPreview(previewImage);
+    });
+
+    trigger.addEventListener("mouseleave", () => {
+      hideWorkHoverPreview();
+    });
+
+    trigger.addEventListener("focus", () => {
+      showWorkHoverPreview(previewImage);
+    });
+
+    trigger.addEventListener("blur", () => {
+      hideWorkHoverPreview();
+    });
+  });
 
   const lightbox = document.querySelector(".image-lightbox");
   const lightboxImage = lightbox?.querySelector(".image-lightbox-image");

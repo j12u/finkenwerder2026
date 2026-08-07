@@ -12,6 +12,10 @@ body {
   font-size: 1.04rem;
 }
 
+.landing {
+  position: relative;
+}
+
 .language-switch {
   display: flex;
   gap: 0.25rem;
@@ -136,6 +140,43 @@ body {
 
 body.has-image-lightbox {
   overflow: hidden;
+}
+
+.work-hover-preview {
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  transition: opacity 0.18s ease;
+  z-index: 0;
+}
+
+.work-hover-preview.is-visible {
+  opacity: 1;
+}
+
+.work-hover-preview-image {
+  display: block;
+  height: 100%;
+  inset: 0;
+  margin: 0;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.22;
+  position: absolute;
+  width: 100%;
+}
+
+.landing-section,
+.site-header {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .work-hover-preview {
+    display: none;
+  }
 }
 
 .work-image-trigger {
