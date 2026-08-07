@@ -1,14 +1,104 @@
 <?php snippet('header') ?>
 
-<main class="landing">
-  <?php if ($mainPrize = page('main-prize')): ?>
-    <?php
-    $mainPrizeArtist = $mainPrize->children()->listed()->filterBy('intendedTemplate', 'artist')->first();
-    $mainPrizeWorks = $mainPrize->children()->listed()->filterBy('intendedTemplate', 'main-prize-work');
-    ?>
+<?php
+$mainPrize = page('main-prize');
+$mainPrizeArtist = $mainPrize ? $mainPrize->children()->listed()->filterBy('intendedTemplate', 'artist')->first() : null;
+$mainPrizeWorks = $mainPrize ? $mainPrize->children()->listed()->filterBy('intendedTemplate', 'main-prize-work') : null;
 
-	    <?php if ($mainPrizeArtist || $mainPrizeWorks->isNotEmpty()): ?>
-	      <section class="landing-section" id="main-prize">
+$emergingArtist = page('emerging-artist');
+$emergingArtistPage = $emergingArtist ? $emergingArtist->children()->listed()->filterBy('intendedTemplate', 'artist')->first() : null;
+$emergingWorks = $emergingArtist ? $emergingArtist->children()->listed()->filterBy('intendedTemplate', 'emerging-artist-work') : null;
+$emergingFirstWork = $emergingWorks && $emergingWorks->isNotEmpty() ? $emergingWorks->first() : null;
+
+$aboutPage = page('about');
+$imprintPage = page('imprint');
+$dataPrivacyPage = page('data-privacy');
+?>
+
+<main class="landing">
+  <?php /* MOBILE LAYOUT */ ?>
+  <section class="mobile-landing" aria-label="Mobile landing">
+    <div class="mobile-landing-panel">
+      <?php if ($kirby->languages()->count() > 1): ?>
+        <nav class="mobile-language-switch">
+          <?php foreach ($kirby->languages() as $language): ?>
+            <a href="<?= $page->url($language->code()) ?>"<?= $kirby->language()?->code() === $language->code() ? ' aria-current="true"' : '' ?>>
+              <?= strtoupper($language->code()) ?>
+            </a>
+          <?php endforeach ?>
+        </nav>
+      <?php endif ?>
+
+      <?php if ($mainPrize && ($mainPrizeArtist || ($mainPrizeWorks && $mainPrizeWorks->isNotEmpty()))): ?>
+        <section class="mobile-group">
+          <p class="mobile-group-title"><?= $mainPrize->title()->html() ?></p>
+
+          <?php if ($mainPrizeArtist): ?>
+            <p class="mobile-branch-row mobile-branch-row-inline">
+              <span class="mobile-branch-label">Artist</span>
+              <span class="mobile-branch-line" aria-hidden="true"></span>
+              <span class="mobile-branch-value"><?= $mainPrizeArtist->title()->html() ?></span>
+            </p>
+          <?php endif ?>
+
+          <?php if ($mainPrizeWorks && $mainPrizeWorks->isNotEmpty()): ?>
+            <p class="mobile-branch-row mobile-branch-row-last">
+              <span class="mobile-branch-label">Works</span>
+            </p>
+
+            <ul class="mobile-work-list">
+              <?php foreach ($mainPrizeWorks as $work): ?>
+                <li class="mobile-work-item"><?= $work->title()->html() ?></li>
+              <?php endforeach ?>
+            </ul>
+          <?php endif ?>
+        </section>
+      <?php endif ?>
+
+      <?php if ($emergingArtist && ($emergingArtistPage || ($emergingWorks && $emergingWorks->isNotEmpty()))): ?>
+        <section class="mobile-group">
+          <p class="mobile-group-title"><?= $emergingArtist->title()->html() ?></p>
+
+          <?php if ($emergingArtistPage): ?>
+            <p class="mobile-branch-row mobile-branch-row-inline">
+              <span class="mobile-branch-label">Artist</span>
+              <span class="mobile-branch-line" aria-hidden="true"></span>
+              <span class="mobile-branch-value"><?= $emergingArtistPage->title()->html() ?></span>
+            </p>
+          <?php endif ?>
+
+          <?php if ($emergingFirstWork): ?>
+            <p class="mobile-branch-row mobile-branch-row-inline mobile-branch-row-last">
+              <span class="mobile-branch-label">Works</span>
+              <span class="mobile-branch-line" aria-hidden="true"></span>
+              <span class="mobile-branch-value"><?= $emergingFirstWork->title()->html() ?></span>
+            </p>
+          <?php endif ?>
+        </section>
+      <?php endif ?>
+
+      <section class="mobile-links">
+        <?php if ($aboutPage): ?>
+          <p class="mobile-link-row"><?= $aboutPage->title()->html() ?></p>
+        <?php endif ?>
+
+        <?php if ($imprintPage): ?>
+          <p class="mobile-link-row"><?= $imprintPage->title()->html() ?></p>
+        <?php endif ?>
+
+        <?php if ($dataPrivacyPage): ?>
+          <p class="mobile-link-row"><?= $dataPrivacyPage->title()->html() ?></p>
+        <?php endif ?>
+      </section>
+    </div>
+  </section>
+
+  <?php /* DESKTOP LAYOUT */ ?>
+  <div class="desktop-landing">
+  <?php if ($mainPrize): ?>
+
+		    <?php if ($mainPrizeArtist || $mainPrizeWorks->isNotEmpty()): ?>
+		      <section class="landing-section" id="main-prize">
 	        <div class="tree-root-row">
 	          <p>
 	            <a class="main-prize-home-link" href="<?= $page->url() ?>" aria-disabled="true" tabindex="-1">
@@ -117,12 +207,7 @@
     <?php endif ?>
   <?php endif ?>
 
-  <?php if ($emergingArtist = page('emerging-artist')): ?>
-    <?php
-    $emergingArtistPage = $emergingArtist->children()->listed()->filterBy('intendedTemplate', 'artist')->first();
-    $emergingWorks = $emergingArtist->children()->listed()->filterBy('intendedTemplate', 'emerging-artist-work');
-    ?>
-
+  <?php if ($emergingArtist): ?>
     <section class="landing-section" id="emerging-artist">
       <div class="tree-root-row">
         <p><?= $emergingArtist->title()->html() ?></p>
@@ -244,16 +329,16 @@
     </section>
   <?php endif ?>
 
-  <?php if ($about = page('about')): ?>
+  <?php if ($aboutPage): ?>
     <section class="landing-section" id="about">
       <ul class="tree tree-group">
         <li>
           <button class="tree-toggle" type="button" aria-expanded="false">
-            <?= $about->title()->html() ?>
+            <?= $aboutPage->title()->html() ?>
           </button>
           <ul class="tree-children">
-            <?php if ($about->text()->isNotEmpty()): ?>
-              <li><?= $about->text()->kt() ?></li>
+            <?php if ($aboutPage->text()->isNotEmpty()): ?>
+              <li><?= $aboutPage->text()->kt() ?></li>
             <?php endif ?>
           </ul>
         </li>
@@ -261,16 +346,16 @@
     </section>
   <?php endif ?>
 
-  <?php if ($about = page('imprint')): ?>
+  <?php if ($imprintPage): ?>
     <section class="landing-section" id="imprint">
       <ul class="tree tree-group">
         <li>
           <button class="tree-toggle" type="button" aria-expanded="false">
-            <?= $about->title()->html() ?>
+            <?= $imprintPage->title()->html() ?>
           </button>
           <ul class="tree-children">
-            <?php if ($about->text()->isNotEmpty()): ?>
-              <li><?= $about->text()->kt() ?></li>
+            <?php if ($imprintPage->text()->isNotEmpty()): ?>
+              <li><?= $imprintPage->text()->kt() ?></li>
             <?php endif ?>
           </ul>
         </li>
@@ -278,27 +363,27 @@
     </section>
   <?php endif ?>
 
-   <?php if ($about = page('data-privacy')): ?>
+   <?php if ($dataPrivacyPage): ?>
     <section class="landing-section" id="data-privacy">
       <ul class="tree tree-group">
         <li>
           <button class="tree-toggle" type="button" aria-expanded="false">
-            <?= $about->title()->html() ?>
+            <?= $dataPrivacyPage->title()->html() ?>
           </button>
           <ul class="tree-children">
-            <?php if ($about->text()->isNotEmpty()): ?>
-              <li><?= $about->text()->kt() ?></li>
+            <?php if ($dataPrivacyPage->text()->isNotEmpty()): ?>
+              <li><?= $dataPrivacyPage->text()->kt() ?></li>
             <?php endif ?>
           </ul>
         </li>
       </ul>
     </section>
   <?php endif ?>
+  </div>
 
 
 
 <div class="image-lightbox" hidden>
-  <button class="image-lightbox-close" type="button" aria-label="Close image">&times;</button>
   <div class="image-lightbox-backdrop" aria-hidden="true"></div>
   <div class="image-lightbox-content" role="dialog" aria-modal="true" aria-label="Expanded image">
     <img class="image-lightbox-image" src="" alt="">
@@ -333,6 +418,12 @@
     homeLink.tabIndex = hasOpenMainPrizePanel ? 0 : -1;
     homeLink.classList.toggle("is-active", hasOpenMainPrizePanel);
   };
+
+  const hasOpenDesktopPanel = () => Boolean(
+    document.querySelector(".desktop-landing .tree-toggle.is-open")
+  );
+
+  let activeHoverTrigger = null;
 
   const closeAllPanels = () => {
     document.querySelectorAll(".tree-children.is-open").forEach((child) => {
@@ -426,6 +517,7 @@
 
       updateArtistHighlight();
       updateMainPrizeHomeLink();
+      syncWorkHoverPreview();
     });
   });
 
@@ -440,39 +532,57 @@
 
   const workHoverPreview = document.querySelector(".work-hover-preview");
   const workHoverPreviewImage = workHoverPreview?.querySelector(".work-hover-preview-image");
-  const showWorkHoverPreview = (src) => {
+  function showWorkHoverPreview(src) {
+    if (hasOpenDesktopPanel()) return;
     if (!workHoverPreview || !workHoverPreviewImage || !src) return;
 
     workHoverPreviewImage.src = src;
     workHoverPreview.classList.add("is-visible");
-  };
+  }
 
-  const hideWorkHoverPreview = () => {
+  function hideWorkHoverPreview() {
     if (!workHoverPreview || !workHoverPreviewImage) return;
 
     workHoverPreview.classList.remove("is-visible");
     workHoverPreviewImage.src = "";
-  };
+  }
+
+  function syncWorkHoverPreview() {
+    const previewImage = activeHoverTrigger?.dataset.hoverImage ?? "";
+
+    if (hasOpenDesktopPanel() || !previewImage) {
+      hideWorkHoverPreview();
+      return;
+    }
+
+    showWorkHoverPreview(previewImage);
+  }
 
   document.querySelectorAll(".work-hover-trigger").forEach((trigger) => {
-    const previewImage = trigger.dataset.hoverImage ?? "";
-
-    if (!previewImage) return;
-
     trigger.addEventListener("mouseenter", () => {
-      showWorkHoverPreview(previewImage);
+      activeHoverTrigger = trigger;
+      syncWorkHoverPreview();
     });
 
     trigger.addEventListener("mouseleave", () => {
-      hideWorkHoverPreview();
+      if (activeHoverTrigger === trigger) {
+        activeHoverTrigger = null;
+      }
+
+      syncWorkHoverPreview();
     });
 
     trigger.addEventListener("focus", () => {
-      showWorkHoverPreview(previewImage);
+      activeHoverTrigger = trigger;
+      syncWorkHoverPreview();
     });
 
     trigger.addEventListener("blur", () => {
-      hideWorkHoverPreview();
+      if (activeHoverTrigger === trigger) {
+        activeHoverTrigger = null;
+      }
+
+      syncWorkHoverPreview();
     });
   });
 
@@ -499,7 +609,7 @@
   });
 
   lightbox?.addEventListener("click", (event) => {
-    const clickedClose = event.target.closest(".image-lightbox-close, .image-lightbox-backdrop");
+    const clickedClose = event.target.closest(".image-lightbox-image, .image-lightbox-backdrop");
 
     if (clickedClose) {
       lightboxClose();
