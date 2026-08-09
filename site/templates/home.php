@@ -34,11 +34,16 @@ $dataPrivacyPage = page('data-privacy');
           <p class="mobile-group-title"><?= $mainPrize->title()->html() ?></p>
 
           <?php if ($mainPrizeArtist): ?>
-            <p class="mobile-branch-row mobile-branch-row-inline">
+            <button class="mobile-branch-row mobile-branch-row-inline mobile-toggle" type="button" aria-expanded="false">
               <span class="mobile-branch-label">Artist</span>
               <span class="mobile-branch-line" aria-hidden="true"></span>
               <span class="mobile-branch-value"><?= $mainPrizeArtist->title()->html() ?></span>
-            </p>
+            </button>
+            <div class="mobile-panel">
+              <?php if ($mainPrizeArtist->text()->isNotEmpty()): ?>
+                <?= $mainPrizeArtist->text()->kt() ?>
+              <?php endif ?>
+            </div>
           <?php endif ?>
 
           <?php if ($mainPrizeWorks && $mainPrizeWorks->isNotEmpty()): ?>
@@ -48,7 +53,54 @@ $dataPrivacyPage = page('data-privacy');
 
             <ul class="mobile-work-list">
               <?php foreach ($mainPrizeWorks as $work): ?>
-                <li class="mobile-work-item"><?= $work->title()->html() ?></li>
+                <?php $mobileHasMainWorkDetails = $work->year()->isNotEmpty() || $work->material()->isNotEmpty() || $work->description()->isNotEmpty() || $work->images()->isNotEmpty(); ?>
+                <li class="mobile-work-entry">
+                  <button class="mobile-work-item mobile-toggle<?= $work->uid() === 'silent-force-red-caress' ? ' mobile-work-item-corner' : '' ?>" type="button" aria-expanded="false">
+                    <?= $work->title()->html() ?>
+                  </button>
+                  <div class="mobile-panel mobile-work-panel">
+                    <?php if ($mobileHasMainWorkDetails): ?>
+                      <ul class="mobile-details-list">
+                        <?php if ($work->year()->isNotEmpty()): ?>
+                          <li class="mobile-details-item">
+                            <span class="mobile-details-label">Year</span>
+                            <span class="mobile-details-value"><?= $work->year()->html() ?></span>
+                          </li>
+                        <?php endif ?>
+                        <?php if ($work->material()->isNotEmpty()): ?>
+                          <li class="mobile-details-item">
+                            <span class="mobile-details-label">Material</span>
+                            <span class="mobile-details-value"><?= $work->material()->html() ?></span>
+                          </li>
+                        <?php endif ?>
+                        <?php if ($work->description()->isNotEmpty()): ?>
+                          <li class="mobile-details-item mobile-details-item-block">
+                            <span class="mobile-details-label">Description</span>
+                            <div class="mobile-details-richtext"><?= $work->description()->kt() ?></div>
+                          </li>
+                        <?php endif ?>
+                      </ul>
+                    <?php endif ?>
+
+                    <?php if ($work->images()->isNotEmpty()): ?>
+                      <div class="mobile-work-images">
+                        <?php foreach ($work->images() as $image): ?>
+                          <figure>
+                            <button
+                              class="work-image-trigger"
+                              type="button"
+                              data-image-src="<?= $image->url() ?>"
+                              data-image-alt="<?= $image->alt()->or($work->title())->html() ?>"
+                              aria-label="Open image"
+                            >
+                              <img src="<?= $image->resize(1200)->url() ?>" alt="<?= $image->alt()->or($work->title())->html() ?>">
+                            </button>
+                          </figure>
+                        <?php endforeach ?>
+                      </div>
+                    <?php endif ?>
+                  </div>
+                </li>
               <?php endforeach ?>
             </ul>
           <?php endif ?>
@@ -60,34 +112,115 @@ $dataPrivacyPage = page('data-privacy');
           <p class="mobile-group-title"><?= $emergingArtist->title()->html() ?></p>
 
           <?php if ($emergingArtistPage): ?>
-            <p class="mobile-branch-row mobile-branch-row-inline">
+            <button class="mobile-branch-row mobile-branch-row-inline mobile-toggle" type="button" aria-expanded="false">
               <span class="mobile-branch-label">Artist</span>
               <span class="mobile-branch-line" aria-hidden="true"></span>
               <span class="mobile-branch-value"><?= $emergingArtistPage->title()->html() ?></span>
-            </p>
+            </button>
+            <div class="mobile-panel">
+              <?php if ($emergingArtistPage->text()->isNotEmpty()): ?>
+                <?= $emergingArtistPage->text()->kt() ?>
+              <?php endif ?>
+            </div>
           <?php endif ?>
 
           <?php if ($emergingFirstWork): ?>
-            <p class="mobile-branch-row mobile-branch-row-inline mobile-branch-row-last">
+            <button class="mobile-branch-row mobile-branch-row-inline mobile-branch-row-last mobile-toggle" type="button" aria-expanded="false">
               <span class="mobile-branch-label">Works</span>
               <span class="mobile-branch-line" aria-hidden="true"></span>
               <span class="mobile-branch-value"><?= $emergingFirstWork->title()->html() ?></span>
-            </p>
+            </button>
+            <div class="mobile-panel mobile-work-panel">
+              <?php $mobileHasEmergingWorkDetails = $emergingFirstWork->year()->isNotEmpty() || $emergingFirstWork->medium()->isNotEmpty() || $emergingFirstWork->duration()->isNotEmpty() || $emergingFirstWork->dimensions()->isNotEmpty() || $emergingFirstWork->courtesy()->isNotEmpty() || $emergingFirstWork->description()->isNotEmpty() || $emergingFirstWork->images()->isNotEmpty(); ?>
+              <?php if ($mobileHasEmergingWorkDetails): ?>
+                <ul class="mobile-details-list">
+                  <?php if ($emergingFirstWork->year()->isNotEmpty()): ?>
+                    <li class="mobile-details-item">
+                      <span class="mobile-details-label">Year</span>
+                      <span class="mobile-details-value"><?= $emergingFirstWork->year()->html() ?></span>
+                    </li>
+                  <?php endif ?>
+                  <?php if ($emergingFirstWork->medium()->isNotEmpty()): ?>
+                    <li class="mobile-details-item">
+                      <span class="mobile-details-label">Medium</span>
+                      <span class="mobile-details-value"><?= $emergingFirstWork->medium()->html() ?></span>
+                    </li>
+                  <?php endif ?>
+                  <?php if ($emergingFirstWork->duration()->isNotEmpty()): ?>
+                    <li class="mobile-details-item">
+                      <span class="mobile-details-label">Duration</span>
+                      <span class="mobile-details-value"><?= $emergingFirstWork->duration()->html() ?></span>
+                    </li>
+                  <?php endif ?>
+                  <?php if ($emergingFirstWork->dimensions()->isNotEmpty()): ?>
+                    <li class="mobile-details-item">
+                      <span class="mobile-details-label">Dimensions</span>
+                      <span class="mobile-details-value"><?= $emergingFirstWork->dimensions()->html() ?></span>
+                    </li>
+                  <?php endif ?>
+                  <?php if ($emergingFirstWork->courtesy()->isNotEmpty()): ?>
+                    <li class="mobile-details-item">
+                      <span class="mobile-details-label">Courtesy</span>
+                      <span class="mobile-details-value"><?= $emergingFirstWork->courtesy()->html() ?></span>
+                    </li>
+                  <?php endif ?>
+                  <?php if ($emergingFirstWork->description()->isNotEmpty()): ?>
+                    <li class="mobile-details-item mobile-details-item-block">
+                      <span class="mobile-details-label">Description</span>
+                      <div class="mobile-details-richtext"><?= $emergingFirstWork->description()->kt() ?></div>
+                    </li>
+                  <?php endif ?>
+                </ul>
+              <?php endif ?>
+
+              <?php if ($emergingFirstWork->images()->isNotEmpty()): ?>
+                <div class="mobile-work-images">
+                  <?php foreach ($emergingFirstWork->images() as $image): ?>
+                    <figure>
+                      <button
+                        class="work-image-trigger"
+                        type="button"
+                        data-image-src="<?= $image->url() ?>"
+                        data-image-alt="<?= $image->alt()->or($emergingFirstWork->title())->html() ?>"
+                        aria-label="Open image"
+                      >
+                        <img src="<?= $image->resize(1200)->url() ?>" alt="<?= $image->alt()->or($emergingFirstWork->title())->html() ?>">
+                      </button>
+                    </figure>
+                  <?php endforeach ?>
+                </div>
+              <?php endif ?>
+            </div>
           <?php endif ?>
         </section>
       <?php endif ?>
 
       <section class="mobile-links">
         <?php if ($aboutPage): ?>
-          <p class="mobile-link-row"><?= $aboutPage->title()->html() ?></p>
+          <button class="mobile-link-row mobile-toggle" type="button" aria-expanded="false"><?= $aboutPage->title()->html() ?></button>
+          <div class="mobile-panel">
+            <?php if ($aboutPage->text()->isNotEmpty()): ?>
+              <?= $aboutPage->text()->kt() ?>
+            <?php endif ?>
+          </div>
         <?php endif ?>
 
         <?php if ($imprintPage): ?>
-          <p class="mobile-link-row"><?= $imprintPage->title()->html() ?></p>
+          <button class="mobile-link-row mobile-toggle" type="button" aria-expanded="false"><?= $imprintPage->title()->html() ?></button>
+          <div class="mobile-panel">
+            <?php if ($imprintPage->text()->isNotEmpty()): ?>
+              <?= $imprintPage->text()->kt() ?>
+            <?php endif ?>
+          </div>
         <?php endif ?>
 
         <?php if ($dataPrivacyPage): ?>
-          <p class="mobile-link-row"><?= $dataPrivacyPage->title()->html() ?></p>
+          <button class="mobile-link-row mobile-toggle mobile-link-row-corner" type="button" aria-expanded="false"><?= $dataPrivacyPage->title()->html() ?></button>
+          <div class="mobile-panel">
+            <?php if ($dataPrivacyPage->text()->isNotEmpty()): ?>
+              <?= $dataPrivacyPage->text()->kt() ?>
+            <?php endif ?>
+          </div>
         <?php endif ?>
       </section>
     </div>
@@ -583,6 +716,19 @@ $dataPrivacyPage = page('data-privacy');
       }
 
       syncWorkHoverPreview();
+    });
+  });
+
+  document.querySelectorAll(".mobile-toggle").forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const panel = toggle.nextElementSibling;
+
+      if (!panel || !panel.classList.contains("mobile-panel")) return;
+
+      const isOpen = panel.classList.contains("is-open");
+
+      panel.classList.toggle("is-open", !isOpen);
+      toggle.setAttribute("aria-expanded", isOpen ? "false" : "true");
     });
   });
 
