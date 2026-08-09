@@ -802,9 +802,9 @@ html[lang="de"] #emerging-artist .work-details-group {
     left: -0.3rem; /* emerging work,artist group */
   }
 
-  .mobile-group:nth-of-type(2) .mobile-branch-row:first-of-type .mobile-branch-value {
+  .mobile-emerging-artist-trigger .mobile-branch-value {
     position: relative;
-    left: -9.8rem; /* emerging - artist name */
+    left: -9.75rem; /* emerging - artist name */
   }
 
   .mobile-group:nth-of-type(2) .mobile-branch-row:last-of-type .mobile-branch-value {
@@ -812,7 +812,7 @@ html[lang="de"] #emerging-artist .work-details-group {
     left: -6.1rem; /* emerging - artwork name */
   }
 
-  .mobile-group:nth-of-type(2) .mobile-branch-row-inline:first-of-type .mobile-branch-line {
+  .mobile-emerging-artist-trigger .mobile-branch-line {
     transform: scaleX(0.22); /* emerging - line for artist - name */
     transform-origin: left center;
   }
@@ -856,8 +856,12 @@ html[lang="de"] #emerging-artist .work-details-group {
   }
 
   .mobile-language-switch a {
-    color: rgb(0, 0, 0);
+    color: rgb(188, 188, 188);
     text-decoration: none;
+  }
+
+  .mobile-language-switch a[aria-current="true"] {
+    color: rgb(0, 0, 0);
   }
 
   .mobile-group + .mobile-group {
@@ -878,8 +882,14 @@ html[lang="de"] #emerging-artist .work-details-group {
   }
 
   .mobile-group-title {
+    background: none;
+    border: 0;
+    color: inherit;
+    display: block;
     line-height: 1.2;
     padding-left: 1rem;
+    text-align: left;
+    width: 100%;
   }
 
   .mobile-group-title::before,

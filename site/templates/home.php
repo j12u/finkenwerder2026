@@ -31,7 +31,7 @@ $dataPrivacyPage = page('data-privacy');
 
       <?php if ($mainPrize && ($mainPrizeArtist || ($mainPrizeWorks && $mainPrizeWorks->isNotEmpty()))): ?>
         <section class="mobile-group">
-          <p class="mobile-group-title"><?= $mainPrize->title()->html() ?></p>
+          <button class="mobile-group-title mobile-reset-trigger" type="button"><?= $mainPrize->title()->html() ?></button>
 
           <?php if ($mainPrizeArtist): ?>
             <button class="mobile-branch-row mobile-branch-row-inline mobile-toggle" type="button" aria-expanded="false">
@@ -109,10 +109,10 @@ $dataPrivacyPage = page('data-privacy');
 
       <?php if ($emergingArtist && ($emergingArtistPage || ($emergingWorks && $emergingWorks->isNotEmpty()))): ?>
         <section class="mobile-group">
-          <p class="mobile-group-title"><?= $emergingArtist->title()->html() ?></p>
+          <button class="mobile-group-title mobile-reset-trigger" type="button"><?= $emergingArtist->title()->html() ?></button>
 
           <?php if ($emergingArtistPage): ?>
-            <button class="mobile-branch-row mobile-branch-row-inline mobile-toggle" type="button" aria-expanded="false">
+            <button class="mobile-branch-row mobile-branch-row-inline mobile-toggle mobile-emerging-artist-trigger" type="button" aria-expanded="false">
               <span class="mobile-branch-label">Artist</span>
               <span class="mobile-branch-line" aria-hidden="true"></span>
               <span class="mobile-branch-value"><?= $emergingArtistPage->title()->html() ?></span>
@@ -729,6 +729,22 @@ $dataPrivacyPage = page('data-privacy');
 
       panel.classList.toggle("is-open", !isOpen);
       toggle.setAttribute("aria-expanded", isOpen ? "false" : "true");
+    });
+  });
+
+  const closeMobilePanels = () => {
+    document.querySelectorAll(".mobile-panel.is-open").forEach((panel) => {
+      panel.classList.remove("is-open");
+    });
+
+    document.querySelectorAll(".mobile-toggle[aria-expanded=\"true\"]").forEach((toggle) => {
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  };
+
+  document.querySelectorAll(".mobile-reset-trigger").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      closeMobilePanels();
     });
   });
 
