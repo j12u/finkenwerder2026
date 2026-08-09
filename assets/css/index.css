@@ -954,6 +954,14 @@ html[lang="de"] #emerging-artist .work-details-group {
     content: "┣ ";
   }
 
+  .mobile-toggle[aria-expanded="true"] {
+    color: rgb(0, 0, 0);
+  }
+
+  .mobile-toggle[aria-expanded="true"] .mobile-branch-value {
+    color: rgb(0, 0, 0);
+  }
+
   .mobile-work-item:last-child::before,
   .mobile-links .mobile-link-row:last-child::before {
     content: "┗ ";
@@ -992,6 +1000,11 @@ html[lang="de"] #emerging-artist .work-details-group {
     display: block;
   }
 
+  .mobile-work-panel.is-open {
+    display: flex;
+    flex-direction: column;
+  }
+
   .mobile-panel > :first-child {
     margin-top: 0;
   }
@@ -1020,9 +1033,17 @@ html[lang="de"] #emerging-artist .work-details-group {
   }
 
   .mobile-details-label {
-    color: rgb(150, 150, 150);
+    color: rgb(0, 0, 0);
     display: block;
     margin-bottom: 0.08rem;
+    position: relative;
+  }
+
+  .mobile-details-label::before {
+    content: "┣ ";
+    left: -1rem;
+    position: absolute;
+    top: 0;
   }
 
   .mobile-details-richtext > :first-child {
@@ -1035,6 +1056,8 @@ html[lang="de"] #emerging-artist .work-details-group {
 
   .mobile-work-images {
     margin-top: 0.75rem;
+    order: -1;
+    margin-bottom: 0.75rem;
   }
 
   .mobile-work-images figure {
@@ -1045,6 +1068,11 @@ html[lang="de"] #emerging-artist .work-details-group {
     display: block;
     height: auto;
     max-width: 100%;
+  }
+
+  .image-lightbox-content {
+    box-sizing: border-box;
+    padding-top: 0.5rem;
   }
 }
 
