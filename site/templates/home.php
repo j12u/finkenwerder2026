@@ -51,7 +51,7 @@ $dataPrivacyPage = page('data-privacy');
               <span class="mobile-branch-label">Works</span>
             </p>
 
-            <ul class="mobile-work-list">
+            <ul class="mobile-work-list mobile-main-prize-work-list">
               <?php foreach ($mainPrizeWorks as $work): ?>
                 <?php $mobileHasMainWorkDetails = $work->year()->isNotEmpty() || $work->material()->isNotEmpty() || $work->description()->isNotEmpty() || $work->images()->isNotEmpty(); ?>
                 <li class="mobile-work-entry">
@@ -719,6 +719,55 @@ $dataPrivacyPage = page('data-privacy');
     });
   });
 
+  const syncMobileArtistState = () => {
+    document.querySelectorAll(".mobile-group").forEach((group) => {
+      const artistToggle = group.querySelector(".mobile-branch-row-inline.mobile-toggle");
+      const openWork = group.querySelector(".mobile-work-item[aria-expanded=\"true\"], .mobile-branch-row-last.mobile-toggle[aria-expanded=\"true\"]");
+
+      if (!artistToggle) return;
+
+      artistToggle.classList.toggle("is-work-open", Boolean(openWork));
+    });
+  };
+
+  const mobileMainPrizeWorkList = document.querySelector(".mobile-main-prize-work-list");
+  const mobileMainPrizeWorkItems = mobileMainPrizeWorkList ? [...mobileMainPrizeWorkList.children] : [];
+
+  const resetMobileMainPrizeWorkOrder = () => {
+    if (!mobileMainPrizeWorkList) return;
+
+    mobileMainPrizeWorkItems.forEach((item) => {
+      mobileMainPrizeWorkList.append(item);
+    });
+  };
+
+  const moveMobileMainPrizeWorkToTop = (toggle) => {
+    if (!mobileMainPrizeWorkList) return;
+
+    const item = toggle.closest(".mobile-work-entry");
+
+    if (!item) return;
+
+    mobileMainPrizeWorkList.prepend(item);
+  };
+
+  const syncMobileMainPrizeWorkOrder = (toggle, wasOpen) => {
+    if (!mobileMainPrizeWorkList || !mobileMainPrizeWorkList.contains(toggle)) return;
+
+    resetMobileMainPrizeWorkOrder();
+
+    if (wasOpen === false) {
+      moveMobileMainPrizeWorkToTop(toggle);
+      return;
+    }
+
+    const openWork = mobileMainPrizeWorkList.querySelector(".mobile-work-item[aria-expanded=\"true\"]");
+
+    if (openWork) {
+      moveMobileMainPrizeWorkToTop(openWork);
+    }
+  };
+
   document.querySelectorAll(".mobile-toggle").forEach((toggle) => {
     toggle.addEventListener("click", () => {
       const panel = toggle.nextElementSibling;
@@ -729,6 +778,8 @@ $dataPrivacyPage = page('data-privacy');
 
       panel.classList.toggle("is-open", !isOpen);
       toggle.setAttribute("aria-expanded", isOpen ? "false" : "true");
+      syncMobileArtistState();
+      syncMobileMainPrizeWorkOrder(toggle, isOpen);
     });
   });
 
@@ -740,6 +791,9 @@ $dataPrivacyPage = page('data-privacy');
     document.querySelectorAll(".mobile-toggle[aria-expanded=\"true\"]").forEach((toggle) => {
       toggle.setAttribute("aria-expanded", "false");
     });
+
+    syncMobileArtistState();
+    resetMobileMainPrizeWorkOrder();
   };
 
   document.querySelectorAll(".mobile-reset-trigger").forEach((trigger) => {

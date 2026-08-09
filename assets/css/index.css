@@ -972,6 +972,10 @@ html[lang="de"] #emerging-artist .work-details-group {
     color: rgb(0, 0, 0);
   }
 
+  .mobile-branch-row-inline.is-work-open .mobile-branch-value {
+    color: rgb(0, 0, 0);
+  }
+
   .mobile-work-item:last-child::before,
   .mobile-links .mobile-link-row:last-child::before {
     content: "┗ ";
@@ -1054,6 +1058,14 @@ html[lang="de"] #emerging-artist .work-details-group {
     left: -1rem;
     position: absolute;
     top: 0;
+  }
+
+  .mobile-group:first-of-type .mobile-work-panel .mobile-details-item-block .mobile-details-label::before {
+    content: "┗ ";
+  }
+
+  .mobile-group:nth-of-type(2) .mobile-work-panel .mobile-details-item-block .mobile-details-label::before {
+    content: "┗ ";
   }
 
   .mobile-details-richtext > :first-child {
