@@ -3,7 +3,3 @@ Uuid: 8seyqcc45gml5bey
 ----
 
 Focus: 48.8% 45.9%
-
-----
-
-Lock: dxwtieZj
