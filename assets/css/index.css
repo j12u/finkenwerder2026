@@ -788,39 +788,9 @@ html[lang="de"] #emerging-artist .work-details-group {
     left: 0.6rem; /* main work list */
   }
 
- .mobile-group:first-of-type .mobile-branch-row-inline .mobile-branch-value {
-    position: relative;
-    left: -8rem; /* main artist name */
-  }
-  
-  .mobile-group:first-of-type .mobile-branch-row-inline .mobile-branch-line {
-    transform: scaleX(0.25); /* main - line for artist label - name  */
-    transform-origin: left center;
-  }
-
   .mobile-group:nth-of-type(2) .mobile-branch-row {
     position: relative;
     left: -0.3rem; /* emerging work,artist group */
-  }
-
-  .mobile-emerging-artist-trigger .mobile-branch-value {
-    position: relative;
-    left: -9.75rem; /* emerging - artist name */
-  }
-
-  .mobile-group:nth-of-type(2) .mobile-branch-row:last-of-type .mobile-branch-value {
-    position: relative;
-    left: -6.1rem; /* emerging - artwork name */
-  }
-
-  .mobile-emerging-artist-trigger .mobile-branch-line {
-    transform: scaleX(0.22); /* emerging - line for artist - name */
-    transform-origin: left center;
-  }
-  
-  .mobile-group:nth-of-type(2) .mobile-branch-row-inline:last-of-type .mobile-branch-line {
-    transform: scaleX(0.28); /* emerging - line for work - work list */
-    transform-origin: left center;
   }
 
   .desktop-landing,
@@ -932,19 +902,29 @@ html[lang="de"] #emerging-artist .work-details-group {
   .mobile-branch-row-inline {
     align-items: center;
     color: rgb(0, 0, 0);
-    display: flex;
-    gap: 0.35rem;
+    display: grid;
+    grid-template-columns: 3.8rem 1.8rem minmax(0, 1fr);
+    column-gap: 0;
+    row-gap: 0.35rem;
+    width: 100%;
   }
 
   .mobile-branch-line {
     border-top: 1px solid rgb(190, 190, 190);
-    flex: 1 1 auto;
-    min-width: 2rem;
+    margin-left: -0.9rem;
+    min-width: 0;
+    width: calc(100% + 0.9rem);
   }
 
   .mobile-branch-value,
   .mobile-work-list {
     color: rgb(188, 188, 188);
+  }
+
+  .mobile-branch-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    padding-left: 0.35rem;
   }
 
   .mobile-work-list {
